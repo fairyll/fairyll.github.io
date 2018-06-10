@@ -1,37 +1,107 @@
-extends includes/layout
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Oracle数据库常用指令</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/highlight.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"></head><body><nav class="main-nav"><a href="/">首页</a><a href="/archives">归档</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>Hexo</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>Oracle数据库常用指令</h1><h2 class="headline">Jun 10, 2018 9:44·1,208 words
+·5 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Oracle"><span class="toc-text">什么是Oracle?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表的简单操作"><span class="toc-text">表的简单操作.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表"><span class="toc-text">创建表:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改表"><span class="toc-text">修改表:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除表"><span class="toc-text">删除表:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分页查询"><span class="toc-text">分页查询:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单行函数"><span class="toc-text">单行函数:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符函数-dual-伪表-一行一列的一个表"><span class="toc-text">字符函数(dual:伪表,一行一列的一个表)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值函数"><span class="toc-text">数值函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日期函数"><span class="toc-text">日期函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换函数"><span class="toc-text">转换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它函数"><span class="toc-text">其它函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析函数"><span class="toc-text">分析函数:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合运算"><span class="toc-text">集合运算:</span></a></li></ol></li></ol></div><section id="post-body"><h2 id="什么是Oracle"><a href="#什么是Oracle" class="headerlink" title="什么是Oracle?"></a>什么是Oracle?</h2><p>1.&nbsp;ORACLE 数据库系统是美国 ORACLE 公司（甲骨文）提供的以分布式数据库为核心的一组软件产品，是目前最流行的客户/服务器(CLIENT/SERVER)或B/S 体系结构的数据库之一。<br>2.&nbsp;ORACLE 通常应用于大型系统的数据库产品。<br>3.&nbsp;ORACLE 数据库是目前世界上使用最为广泛的数据库管理系统，作为一个通用的数据库系统，它具有完整的数据管理功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库它实现了分布式处理功能。</p>
+<h2 id="表的简单操作"><a href="#表的简单操作" class="headerlink" title="表的简单操作."></a>表的简单操作.</h2><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表:"></a>创建表:</h3><blockquote>
+<p>create table 表名(<br>    &nbsp;字段名 类型(长度) primary key,<br>    &nbsp;字段名 类型(长度),<br>    &nbsp;…<br>)</p>
+</blockquote>
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表:"></a>修改表:</h3><blockquote>
+</blockquote>
+<pre><code>添加字段:alter table 表名 add(列名 类型(长度) ,列名 类型(长度) ...)
 
-block content
+修改字段类型:alter table 表名 modify(列名 类型(长度) ,列名 类型(长度) ...)
 
-    section#wrapper.post
-        article
-            header
-                h1!=page.title
-                h2.headline!=date(page.date, 'MMM DD, YYYY h:mm')
-                    |·
-                    |#{wordcount(page.content)} words
-                    |·
-                    |#{min2read(page.content)} minutes read
-                    span.tags
+修改字段名:alter table 表名 rename column 原列名 to 新列名
 
-            if toc(page.content)
-                div#toc!=toc(page.content,{list_number:false})
+删除字段:alter table 表名 drop (列名1,列名2...)
 
-            section#post-body!=page.content
+重命名表:alter table 旧表名 rename to 新表名
+</code></pre><h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表:"></a>删除表:</h3><blockquote>
+</blockquote>
+<pre><code>drop table 表名
+</code></pre><h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询:"></a>分页查询:</h2><blockquote>
+</blockquote>
+<pre><code>1.简单分页  rownum后只能跟&lt;或&lt;=
+例如:
+    得到第10到20的数据
+    select * from (select rownum r,t.* from 表名 t[表的别名] ) where r&gt;10;
 
-            - var prev = page.prev ? page.prev.path : false;
-            - var next = page.next ? page.next.path : false;
-            nav#post-nav
-                span.prev
-                    if page.prev
-                        a(href=url_for(prev))
-                            span.arrow ←
-                            | Newer Posts
-                span.next
-                    if page.next
-                        a(href=url_for(next))
-                            | Older Posts
-                            span.arrow →
+2.基于排序的分页  rownum是在表扫描时就产生了,排序需要在rownum产生后排序
+例如:
+    select * from 
+    (select rownum r,t.* from (select * from 表名 order by 列名 desc ) t) 
+    where r&gt;10;
+</code></pre><h2 id="单行函数"><a href="#单行函数" class="headerlink" title="单行函数:"></a>单行函数:</h2><h3 id="字符函数-dual-伪表-一行一列的一个表"><a href="#字符函数-dual-伪表-一行一列的一个表" class="headerlink" title="字符函数(dual:伪表,一行一列的一个表)"></a>字符函数(dual:伪表,一行一列的一个表)</h3><blockquote>
+</blockquote>
+<pre><code>1.求字符串长度
+    select length(&apos;abcd&apos;) from dual
 
+2.求字符串子串(原字符串,从第几位截取[从1开始],截取几个)
+    select substr(&apos;abcd&apos;,2&apos;2) from dual
 
+3.字符串拼接(可以嵌套拼接,concat:只能有两个参数)
+    select concat( concat(&apos;abc&apos;,&apos;d&apos;),&apos;ef&apos;)from dual
+或者直接拼接
+    select &apos;abc&apos;||&apos;d&apos;||&apos;ef&apos; from dual;
+</code></pre><h3 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h3><blockquote>
+</blockquote>
+<pre><code>1.四舍五入函数
+    select round(100.456) from dual; 从整数四舍五入
+    select round(100.456 , 2) from dual; 从小数点后两位四舍五入
 
+2.数字截取 (不带第二个参数,截取整数,带第二个参数,截取小数点后几位)
+    select trunc(100.567 , 2)from dual; 
 
+3.取模
+    select mod(10,4)from dual; 
+</code></pre><h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><blockquote>
+</blockquote>
+<pre><code>1.加月函数 ADD_MONTHS : 在当前时间加上几个月
+    select add_months(sysdate,2[加两个月]) from dual;
+
+2.求所在月最后一天last_day
+    select last_day(sysdate) from dual;
+
+3.日期截取trunc [并不能按秒截取,只能截取到分钟]
+    select trunc(sysdate) from dual ; 按日截取,把时间截掉
+    select trunc(sysdate,&apos;mm&apos;) from dual; 按月截取,得到某月1日
+    select trunc(sysdate,&apos;yyyy&apos;) from dual;按年截取,得到某年1月1日
+</code></pre><h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><blockquote>
+</blockquote>
+<pre><code>1.数字转字符串
+    select to_char(100) from dual;
+或拼接空串
+    select 100||&apos;&apos; from dual;
+
+2.日期转字符串(sysdate:当前日期)参数中不能包含中文,可以使用拼接
+    select to_char(sysdate , &apos;yyyy-mm-dd hh:mi:ss&apos;) from dual;
+
+3.字符串转日期 to_date
+    select to_date(&apos;2018-05-27&apos;,&apos;yyyy-mm-dd&apos;) from dual;
+
+4.字符串转数字
+    select to_number(&apos;100&apos;) from dual;
+或者加上0
+    select &apos;100&apos;+0 from dual;
+</code></pre><h3 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h3><blockquote>
+<p>1.1.空值处理函数 NVL:当第一个值为null时,显示第二个值,不为null,则直接显示第一个值<br>    select nvl(null,0) from dual;<br>    1.2..空值处理函数 NVL2(a,0,100):当a为null,显示第三个参数,不为null,显示第二个参数<br>    select nvl2(maxnum,to_char(maxnum),’不限’) from dual;</p>
+</blockquote>
+<blockquote>
+<p>2.条件取值 decode<br>    decode(条件 , 值1,翻译值1, 值2,翻译值2,…值n,翻译值n)<br>    <font color="red">如果条件后的值成对出现,有匹配的就返回翻译值,没有返回空</font><br>    <font color="red">如果条件后的值最后只有一个,则为缺省值,当前面都没有匹配,则显示缺省值<strong><br>    <font color="red">如果同时有两个值都可以匹配,则按照先后顺序,匹配前面的值</font></strong> </font></p>
+</blockquote>
+<blockquote>
+<p>3.case语句sql1999(sql固有语法)<br>    select name,(case 条件<br>&nbsp; &nbsp; when 1 then ‘取值1’<br>&nbsp; &nbsp; when 2 then ‘取值2’<br>&nbsp; &nbsp; …<br>&nbsp; &nbsp; end)<br>…</p>
+</blockquote>
+<h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数:"></a>分析函数:</h3><blockquote>
+</blockquote>
+<pre><code>rank() over(order by xxx )       相同的值排名相同，排名跳跃
+dense_rank() over(order by xxx)  相同的值排名相同，排名连续
+row_number() over(order by xxx)  连续的排名，无论值是否相等
+</code></pre><h3 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算:"></a>集合运算:</h3><blockquote>
+</blockquote>
+<pre><code>集合运算就是将两个或者多个结果集组合成为一个结果集。
+
+集合运算包括：
+    UNION ALL(并集)，返回各个查询的所有记录，包括重复记录。
+    UNION(并集)，返回各个查询的所有记录，不包括重复记录。
+    INTERSECT(交集)，返回两个查询共有的记录。
+    MINUS(差集)，返回第一个查询检索出的记录减去第二个查询检索出的记录之后剩余的记录
+</code></pre></section><nav id="post-nav"><span class="prev"></span><span class="next"><a href="/2018/06/10/Oracle中binary_integer与pls_integer/">Older Posts<span class="arrow">→</span></a></span></nav></article></section><footer id="footer"><div id="social"><a class="symbol" href="https://github.com/fairyll"><i class="fa fa-github"></i></a></div><p class="small">因果也是种选择 &nbsp<i class="fa fa-heart" aria-hidden="true">&nbsp Fairy</i></p></footer></body></html>
