@@ -1,0 +1,188 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>���߳����֪ʶ��</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/highlight.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"></head><body><nav class="main-nav"><a href="/">首页</a><a href="/archives">归档</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>Fairy</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>���߳����֪ʶ��</h1><h2 class="headline">Jun 09, 2018 1:53·497 words
+·3 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#�̴߳�����ʽ"><span class="toc-text">�̴߳�����ʽ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-�̳�Thread�ഴ���߳�"><span class="toc-text">1.�̳�Thread�ഴ���߳�</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ʵ��Runnable�ӿڴ����߳�"><span class="toc-text">2.ʵ��Runnable�ӿڴ����߳�</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ʹ��Callable�ӿں�Future�ӿڴ����߳�"><span class="toc-text">3.ʹ��Callable�ӿں�Future�ӿڴ����߳�</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#�߳�����״̬-�½�-����-����-����-����"><span class="toc-text">�߳�����״̬(�½�,����,����,����,����)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-�½�״̬-New"><span class="toc-text">1.�½�״̬(New)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-����״̬-Runnable"><span class="toc-text">2.����״̬(Runnable)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-����״̬-Running"><span class="toc-text">3.����״̬(Running)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-����״̬-Blocked"><span class="toc-text">4. ����״̬(Blocked)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-����״̬-Dead"><span class="toc-text">5. ����״̬(Dead)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#�߳�������"><span class="toc-text">�߳�������</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#������"><span class="toc-text">������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�ֹ���"><span class="toc-text">�ֹ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#������������Ӧ����"><span class="toc-text">������������Ӧ����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�������"><span class="toc-text">�������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#���ֻ���"><span class="toc-text">���ֻ���</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#������-1"><span class="toc-text">������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ƫ����"><span class="toc-text">ƫ����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����������"><span class="toc-text">����������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#����������-1"><span class="toc-text">����������</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#�̳߳�"><span class="toc-text">�̳߳�</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#�̳߳صlo�"><span class="toc-text">�̳߳صĺô�</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#�����߳�"><span class="toc-text">�����߳�</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#�߳����oĳ���"><span class="toc-text">�߳����õĳ���</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#�����������ĸ���Ҫ����"><span class="toc-text">�����������ĸ���Ҫ����</span></a></li></ol></div><section id="post-body"><h1 id="�̴߳�����ʽ"><a href="#�̴߳�����ʽ" class="headerlink" title="�̴߳�����ʽ"></a>�̴߳�����ʽ</h1><h2 id="1-�̳�Thread�ഴ���߳�"><a href="#1-�̳�Thread�ഴ���߳�" class="headerlink" title="1.�̳�Thread�ഴ���߳�"></a>1.�̳�Thread�ഴ���߳�</h2><blockquote>
+<p>����:<br>1.����Thread�������,����д�����run()����,�÷����ķ���������߳���Ҫ��ɵ�����,run()����Ҳ��Ϊ�߳�ִ���塣</p>
+</blockquote>
+<p>2.����Thread�����ʵ����Ҳ���Ǵ������̶߳���</p>
+<blockquote>
+</blockquote>
+<p>3.���̣߳��������̵߳�start()����</p>
+<blockquote>
+</blockquote>
+<pre><code>����ʵ��:
+public class MyThread extends Thread{//�̳�Thread
+     public void run(){
+        //��дrun����
+     }
+}
+public class Main {
+     public static void main(String[] args){
+    ��new MyThread().start();//���������߳�
+    }
+}
+</code></pre><h2 id="2-ʵ��Runnable�ӿڴ����߳�"><a href="#2-ʵ��Runnable�ӿڴ����߳�" class="headerlink" title="2.ʵ��Runnable�ӿڴ����߳�"></a>2.ʵ��Runnable�ӿڴ����߳�</h2><blockquote>
+<p>����:<br>1.����Runnable�ӿڵ�ʵ���࣬��дrun()������run()����Ϊ�̵߳�ִ����.</p>
+</blockquote>
+<p>2.����Runnableʵ�����ʵ�����������ʵ����ΪThread��target������Thread���� <strong>���Thread��������������̶߳���</strong> </p>
+<blockquote>
+</blockquote>
+<p>3.ͨ�������̶߳����start()���������߳�</p>
+<blockquote>
+</blockquote>
+<pre><code>����ʵ��:
+public class MyThread2 implements Runnable{//ʵ��Runnable�ӿ�
+    public void run(){
+    //��дrun����
+    }
+}
+public class Main {
+    public static void main(String[] args){
+        //���������߳�
+        new Thread(new MyThread2()).start();
+    }
+}
+</code></pre><h2 id="3-ʹ��Callable�ӿں�Future�ӿڴ����߳�"><a href="#3-ʹ��Callable�ӿں�Future�ӿڴ����߳�" class="headerlink" title="3.ʹ��Callable�ӿں�Future�ӿڴ����߳�"></a>3.ʹ��Callable�ӿں�Future�ӿڴ����߳�</h2><p>��Runnable�ӿڲ�һ����Callable�ӿ��ṩ��һ��call����������Ϊ�߳�ִ���壬call()������run()��������Ҫǿ��</p>
+<blockquote>
+</blockquote>
+<p>1.call( )���������з���ֵ</p>
+<blockquote>
+</blockquote>
+<p>2.call( )�������������׳��쳣</p>
+<blockquote>
+</blockquote>
+<pre><code>Java5�ṩ��Future�ӿ�������Callable�ӿ���call()�����ķ���ֵ������ΪFuture�ӿ��ṩ��һ��ʵ����FutureTask�����ʵ�����ʵ����Future�ӿڣ���ʵ����Runnable�ӿڣ���˿�����ΪThread���target��
+</code></pre><blockquote>
+<p>����:<br>1.����Callable�ӿڵ�ʵ���࣬��ʵ��call()������Ȼ�󴴽���ʵ�����ʵ������java8��ʼ����ֱ��ʹ��Lambda���ʽ����Callable���󣩡�</p>
+</blockquote>
+<p>2.ʹ��FutureTask������װCallable���󣬸�FutureTask�����װ��Callable�����call()�����ķ���ֵ</p>
+<blockquote>
+</blockquote>
+<p>3.ʹ��FutureTask������ΪThread�����target���������̣߳���ΪFutureTaskʵ����Runnable�ӿڣ�</p>
+<blockquote>
+</blockquote>
+<p>4.����FutureTask�����get()������������߳�ִ�н�����ķ���ֵ</p>
+<blockquote>
+</blockquote>
+<pre><code>public class Main {
+    public static void main(String[] args){
+        MyThread3 th=new MyThread3();
+         //ʹ��Lambda���ʽ����Callable����
+         //ʹ��FutureTask������װCallable����
+         FutureTask&lt;Integer&gt; future=new FutureTask&lt;Integer&gt;(
+             (Callable&lt;Integer&gt;)()-&gt;{
+                 return 5;
+             }
+         );
+         new Thread(task,&quot;�з���ֵ���߳�&quot;).start();//ʵ���ϻ�����Callable���������������߳�
+         try{
+             System.out.println(&quot;���̵߳ķ���ֵ��&quot;+future.get());//get()������������ֱ�����߳�ִ�н����ŷ���
+         }catch(Exception e){
+             ex.printStackTrace();
+         }
+     }
+ }
+</code></pre><h1 id="�߳�����״̬-�½�-����-����-����-����"><a href="#�߳�����״̬-�½�-����-����-����-����" class="headerlink" title="�߳�����״̬(�½�,����,����,����,����)"></a>�߳�����״̬(�½�,����,����,����,����)</h1><h2 id="1-�½�״̬-New"><a href="#1-�½�״̬-New" class="headerlink" title="1.�½�״̬(New)"></a>1.�½�״̬(New)</h2><pre><code>����new��������һ���߳�ʱ�� ����new Thread(r)���̻߳�û�п�ʼ���У���ʱ�̴߳����½�״̬�� ��һ���̴߳�������״̬ʱ������û�п�ʼ�����߳��еĴ���
+</code></pre><h2 id="2-����״̬-Runnable"><a href="#2-����״̬-Runnable" class="headerlink" title="2.����״̬(Runnable)"></a>2.����״̬(Runnable)</h2><pre><code>һ���´������̲߳����Զ���ʼ���У�Ҫִ���̣߳���������̵߳�start()���������̶߳������start()�����������̣߳�start()���������߳����е�ϵͳ��Դ���������߳�����run()��������start()�������غ��߳̾ʹ��ھ���״̬��
+
+���ھ���״̬���̲߳���һ����������run()�������̻߳�����ͬ�����߳̾���CPUʱ�䣬ֻ�л��CPUʱ��ſ��������̡߳���Ϊ�ڵ�CPU�ļ����ϵͳ�У�������ͬʱ���ж���̣߳�һ��ʱ�̽���һ���̴߳�������״̬����˴�ʱ�����ж���̴߳��ھ���״̬���Զ�����ھ���״̬���߳�����Java����ʱϵͳ���̵߳��ȳ���(thread scheduler)�����ȵġ�
+</code></pre><h2 id="3-����״̬-Running"><a href="#3-����״̬-Running" class="headerlink" title="3.����״̬(Running)"></a>3.����״̬(Running)</h2><pre><code>���̻߳��CPUʱ������Ž�������״̬��������ʼִ��run()����.
+</code></pre><h2 id="4-����״̬-Blocked"><a href="#4-����״̬-Blocked" class="headerlink" title="4. ����״̬(Blocked)"></a>4. ����״̬(Blocked)</h2><blockquote>
+<p>�߳����й����У��������ڸ���ԭ���������״̬:</p>
+</blockquote>
+<p>1.�߳�ͨ������sleep��������˯��״̬��</p>
+<blockquote>
+</blockquote>
+<p>2.�̵߳���һ����I/O�ϱ������Ĳ��������ò�������������������֮ǰ���᷵�ص����ĵ����ߣ�</p>
+<blockquote>
+</blockquote>
+<p>3.�߳���ͼ�õ�һ���������������������̳߳��У�</p>
+<blockquote>
+</blockquote>
+<p>4.�߳��ڵȴ�ĳ������������</p>
+<blockquote>
+<p>��ν����״̬���������е��߳�û�����н�������ʱ�ó�CPU����ʱ�������ھ���״̬���߳̾Ϳ��Ի��CPUʱ�䣬��������״̬��</p>
+</blockquote>
+<h2 id="5-����״̬-Dead"><a href="#5-����״̬-Dead" class="headerlink" title="5. ����״̬(Dead)"></a>5. ����״̬(Dead)</h2><blockquote>
+<p>������ԭ��ᵼ���߳�������</p>
+</blockquote>
+<p>1.run���������˳�����Ȼ������</p>
+<blockquote>
+</blockquote>
+<p>2.һ��δ������쳣��ֹ��run������ʹ�߳������</p>
+<blockquote>
+</blockquote>
+<p>Ϊ��ȷ���߳��ڵ�ǰ�Ƿ����ţ�����Ҫô�ǿ����еģ�Ҫô�Ǳ������ˣ�����Ҫʹ��isAlive����������ǿ����л������������������true�� ����߳��Ծ���new״̬�Ҳ��ǿ����еģ� �����߳������ˣ��򷵻�false.</p>
+<h1 id="�߳�������"><a href="#�߳�������" class="headerlink" title="�߳�������"></a>�߳�������</h1><h2 id="������"><a href="#������" class="headerlink" title="������"></a>������</h2><blockquote>
+<p>�ٶ��ᷢ��������ͻ������һ�п���Υ�����������ԵĲ������������ٶ������߳���ͼ���ʻ��߸ı������ڷ��ʡ����ĵĶ���ĸ����Ǻܸߵģ�����ڱ������Ļ����У����㿪ʼ�ı�˶���֮ǰ�ͽ��ö�����ס������ֱ�����ύ�������ĸ���֮����ͷ����� </p>
+</blockquote>
+<h2 id="�ֹ���"><a href="#�ֹ���" class="headerlink" title="�ֹ���"></a>�ֹ���</h2><blockquote>
+<p>���費�ᷢ��������ͻ�����ײ������� </p>
+</blockquote>
+<h2 id="������������Ӧ����"><a href="#������������Ӧ����" class="headerlink" title="������������Ӧ����"></a>������������Ӧ����</h2><pre><code>�̹߳���ͻָ��Ĳ�������Ҫת���ں�̬����ɣ���Щ������ϵͳ�Ĳ������ܴ����˺ܴ��ѹ���������Ӧ���У��������ݵ�����״ֻ̬������̵ܶ�һ��ʱ�䣬Ϊ�����ʱ��ȥ����ͻָ��̲߳���ֵ�ã������ú����������̵߳ȴ�һ���������������������ִ��ʱ�䣬���߳�ִ��һ��æѭ������������ 
+
+������Ĭ�ϵ���������ֵ��10�Σ�����ʹ�ò���-XX:PreBlockSpin���ġ� 
+
+����Ӧ������ζ��������ʱ�䲻�ٹ̶���������ǰһ����ͬһ�����ϵ�����ʱ�估����ӵ���ߵ�״̬�������� 
+</code></pre><h2 id="�������"><a href="#�������" class="headerlink" title="�������"></a>�������</h2><pre><code>�������ʱ������������ʱ����һЩ������Ҫ��ͬ�������Ǳ���⵽�����ܴ��ڹ������ݾ���������������������������Ҫ�ж�������Դ�����ݷ���������֧�֡� 
+</code></pre><h2 id="���ֻ���"><a href="#���ֻ���" class="headerlink" title="���ֻ���"></a>���ֻ���</h2><pre><code>��������̽�⵽��һϵ��������������ͬһ�����󷴸������ͽ���������Ѽ���ͬ���ķ�Χ��չ���ֻ����������������е��ⲿ�� 
+</code></pre><h2 id="������-1"><a href="#������-1" class="headerlink" title="������"></a>������</h2><pre><code>Java SE1.6Ϊ�˼��ٻ�������ͷ������������������ģ������ˡ�ƫ�������͡�������������������Java SE1.6����һ��������״̬������״̬��ƫ����״̬����������״̬����������״̬���������ž�����������������������������ܽ�������ζ��ƫ���������������������ܽ�����ƫ����������������ȴ���ܽ����Ĳ��ԣ�Ŀ����Ϊ����߻�������ͷ�����Ч�ʡ� 
+</code></pre><h2 id="ƫ����"><a href="#ƫ����" class="headerlink" title="ƫ����"></a>ƫ����</h2><pre><code>Hotspot�����߾����������о����ִ��������������������ڶ��߳̾���������������ͬһ�̶߳�λ�ã�Ϊ�����̻߳�����Ĵ��۸��Ͷ�������ƫ��������һ���̷߳���ͬ���鲢��ȡ��ʱ�����ڶ���ͷ��ջ֡�е�����¼��洢��ƫ����߳�ID���Ժ���߳��ڽ�����˳�ͬ����ʱ����Ҫ����CAS�����������ͽ�������ֻ��򵥵Ĳ���һ�¶���ͷ��Mark Word���Ƿ�洢��ָ��ǰ�̵߳�ƫ������������Գɹ�����ʾ�߳��Ѿ�����������������ʧ�ܣ�����Ҫ�ٲ�����Mark Word��ƫ�����ı�ʶ�Ƿ����ó�1����ʾ��ǰ��ƫ�����������û�����ã���ʹ��CAS����������������ˣ�����ʹ��CAS������ͷ��ƫ����ָ��ǰ�̡߳� 
+
+ƫ�����ĳ�����ƫ����ʹ����һ�ֵȵ��������ֲ��ͷ����Ļ��ƣ����Ե������̳߳��Ծ���ƫ����ʱ������ƫ�������̲߳Ż��ͷ�����ƫ�����ĳ�������Ҫ�ȴ�ȫ�ְ�ȫ�㣨�����ʱ�����û���ֽ�������ִ�У�������������ͣӵ��ƫ�������̣߳�Ȼ�������ƫ�������߳��Ƿ���ţ�����̲߳����ڻ״̬���򽫶���ͷ���ó�����״̬������߳���Ȼ���ţ�ӵ��ƫ������ջ�ᱻִ�У�����ƫ����������¼��ջ�е�����¼�Ͷ���ͷ��Mark WordҪô����ƫ���������̣߳�Ҫô�ָ����������߱�Ƕ����ʺ���Ϊƫ�������������ͣ���̡߳���ͼ�е��߳�1��ʾ��ƫ������ʼ�������̣��߳�2��ʾ��ƫ�������������̡� 
+</code></pre><p>�ر�ƫ������ƫ������Java 6��Java 7����Ĭ�����õģ���������Ӧ�ó����������֮��ż�����б�Ҫ����ʹ��JVM�������ر��ӳ�-XX��BiasedLockingStartupDelay = 0�������ȷ���Լ�Ӧ�ó��������е���ͨ������´��ھ���״̬������ͨ��JVM�����ر�ƫ����-XX:-UseBiasedLocking=false����ôĬ�ϻ������������״̬�� </p>
+<h2 id="����������"><a href="#����������" class="headerlink" title="����������"></a>����������</h2><pre><code>���������������߳���ִ��ͬ����֮ǰ��JVM�����ڵ�ǰ�̵߳�ջ���д������ڴ洢����¼�Ŀռ䣬��������ͷ�е�Mark Word���Ƶ�����¼�У��ٷ���ΪDisplaced Mark Word��Ȼ���̳߳���ʹ��CAS������ͷ�е�Mark Word�滻Ϊָ������¼��ָ�롣����ɹ�����ǰ�̻߳���������ʧ�ܣ���ʾ�����߳̾���������ǰ�̱߳㳢��ʹ����������ȡ���� 
+
+������������������������ʱ����ʹ��ԭ�ӵ�CAS��������Displaced Mark Word�滻�ص�����ͷ������ɹ������ʾû�о������������ʧ�ܣ���ʾ��ǰ�����ھ��������ͻ����ͳ�������������ͼ�������߳�ͬʱ�����������������͵�����ͼ�� 
+
+
+
+��Ϊ����������CPU��Ϊ�˱������õ������������������̱߳�����ס�ˣ���һ���������������������Ͳ����ٻָ�����������״̬�������������״̬�£������߳���ͼ��ȡ��ʱ�����ᱻ����ס�������������߳��ͷ���֮��ỽ����Щ�̣߳������ѵ��߳̾ͻ������һ�ֵĶ���֮���� 
+</code></pre><h2 id="����������-1"><a href="#����������-1" class="headerlink" title="����������"></a>����������</h2><pre><code>��������JVM���ֽж����������Monitor���������ٰ���һ���������Ķ��У���һ���ź��������У�wait���У���ǰ�߸��������⣬��һ���������߳�ͬ���� 
+</code></pre><h1 id="�̳߳�"><a href="#�̳߳�" class="headerlink" title="�̳߳�"></a>�̳߳�</h1><blockquote>
+<p>�̳߳���һ�ֶ��̴߳�����ʽ����������н�������ӵ����У�Ȼ���ڴ����̺߳��Զ�����Щ����<br>�̳߳��̶߳��Ǻ�̨�̡߳�<br>ÿ���̶߳�ʹ��Ĭ�ϵĶ�ջ��С����Ĭ�ϵ����ȼ����У������ڶ��̵߳�Ԫ�С�<br>���ĳ���߳����йܴ����п��У������ڵȴ�ĳ���¼���,���̳߳ؽ�������һ�������߳���ʹ���д��������ַ�æ��<br>��������̳߳��̶߳�ʼ�ձ��ַ�æ���������а�������Ĺ��������̳߳ؽ���һ��ʱ��󴴽���һ�������̵߳��̵߳���Ŀ��Զ���ᳬ�����ֵ��<br>�������ֵ���߳̿����Ŷӣ�������Ҫ�ȵ������߳���ɺ�����</p>
+</blockquote>
+<h3 id="�̳߳صlo�"><a href="#�̳߳صlo�" class="headerlink" title="�̳߳صĺô�"></a>�̳߳صĺô�</h3><blockquote>
+<p>1.�����̳߳��е��߳�,��������󴴽�,���������������ܿ���;</p>
+</blockquote>
+<p>2.����Ч�Ŀ����̵߳���󲢷���,���ϵͳ��Դ������,ͬʱ����������Դ����,�������;</p>
+<blockquote>
+</blockquote>
+<p>3.�ܹ����߳̽��м򵥵Ĺ���,ʹ�̵߳�ʹ�ü򵥡���Ч��</p>
+<h3 id="�����߳�"><a href="#�����߳�" class="headerlink" title="�����߳�"></a>�����߳�</h3><p>һ���������治ͬ��ִ��·��</p>
+<blockquote>
+</blockquote>
+<p>ѧϰ�߳�����Ҫ������������</p>
+<blockquote>
+</blockquote>
+<p>���̣�������һ����̬�ĸ���</p>
+<blockquote>
+</blockquote>
+<p>�̣߳�һ������������һ�����߳̽�main()��������һ����������ģ�һ���������治ͬ��ִ��·����</p>
+<blockquote>
+</blockquote>
+<p>��ͬһ��ʱ����ϣ�һ��CPUֻ��֧��һ���߳���ִ�С���ΪCPU���е��ٶȺܿ죬������ǿ������ĸо������Ƕ��߳�һ����</p>
+<h3 id="�߳����oĳ���"><a href="#�߳����oĳ���" class="headerlink" title="�߳����õĳ���"></a>�߳����õĳ���</h3><blockquote>
+</blockquote>
+<p>1 �̼߳������ݹ���������������Ҫ�޸ĵģ���ͬ�������Ҫ�����������ݻ�Ƶ��ͨ��ʱ���� </p>
+<blockquote>
+</blockquote>
+<p>2 �ṩ�Ǿ��ʵķ��������ȼ��������¼���Ӧ�����ȼ��� </p>
+<blockquote>
+</blockquote>
+<p>3 �������м��㣬�ڷ�CPU Bound�ĳ����������Ӧ�ٶȣ�����ʱ�ӣ� </p>
+<blockquote>
+</blockquote>
+<p>4 ������IO������Ӧ�ã����õ��û����飨�����������룬������Ӧ��</p>
+<h1 id="�����������ĸ���Ҫ����"><a href="#�����������ĸ���Ҫ����" class="headerlink" title="�����������ĸ���Ҫ����"></a>�����������ĸ���Ҫ����</h1><blockquote>
+</blockquote>
+<p>�ٻ������������̶�����Ҫ�����Դ���ж�ռ�Կ��ƣ�</p>
+<blockquote>
+</blockquote>
+<p>�����󱣳������������Ѿ�����������һ����Դ����������µ���Դ���룬������Դ�ֵò������㣬���Ǹý�������������ԭ�Ȼ�õ���Դ���ֲ��ţ�</p>
+<blockquote>
+</blockquote>
+<p>�۲��ɰ��������������ѻ�õ���Դ��δʹ����֮ǰ�����ܱ����ᣬֻ����ʹ��������Լ��ͷţ�</p>
+<blockquote>
+</blockquote>
+<p>�ܻ�·����������������ʱ���ڽ�����Դ����ͼ�д��ڻ�·��</p>
+<p>�������һ�����ɽ����������.</p>
+</section><nav id="post-nav"><span class="prev"><a href="/2018/06/10/hello-world/"><span class="arrow">←</span>Newer Posts</a></span><span class="next"><a href="/2018/06/09/集合接口中用的较多的底层实现/">Older Posts<span class="arrow">→</span></a></span></nav></article></section><footer id="footer"><div id="social"><a class="symbol" href="https://github.com/fairyll"><i class="fa fa-github"></i></a></div><p class="small">因果也是种选择 &nbsp<i class="fa fa-heart" aria-hidden="true">&nbsp Fairy</i></p></footer></body></html>
