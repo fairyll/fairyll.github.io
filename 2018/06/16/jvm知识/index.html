@@ -1,39 +1,39 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>jvm֪ʶ��С��֮һ</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/highlight.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"></head><body><nav class="main-nav"><a href="/">首页</a><a href="/archives">归档</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>Fairy</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>jvm֪ʶ��С��֮һ</h1><h2 class="headline">Jun 16, 2018 9:31·137 words
-·1 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#���ʵ����˳��"><span class="toc-text">���ʵ����˳��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM���ڴ�ɷ�Ϊ3������"><span class="toc-text">JVM���ڴ�ɷ�Ϊ3������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#��-heap-��ջ-stack-�ͷ�����-method"><span class="toc-text">��(heap)��ջ(stack)�ͷ�����(method)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#����"><span class="toc-text">����:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ջ��"><span class="toc-text">ջ��:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#������"><span class="toc-text">������:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#�������ջ���-GC"><span class="toc-text">�������ջ���(GC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#�ڴ��Z�"><span class="toc-text">�ڴ��Ż�</span></a></li></ol></li></ol></div><section id="post-body"><h2 id="���ʵ����˳��"><a href="#���ʵ����˳��" class="headerlink" title="���ʵ����˳��"></a>���ʵ����˳��</h2><p>1.����ľ�̬�����;�̬�����<br>2.ִ������ľ�̬�����;�̬�����<br>3.ִ�и���ĳ�Ա������ֵ<br>4.ִ�и���Ĺ�������<br>5.ִ�и���Ĺ��췽������<br>6.ִ������Ĺ�������<br>7.ִ������Ĺ��췽��������</p>
-<h2 id="JVM���ڴ�ɷ�Ϊ3������"><a href="#JVM���ڴ�ɷ�Ϊ3������" class="headerlink" title="JVM���ڴ�ɷ�Ϊ3������"></a>JVM���ڴ�ɷ�Ϊ3������</h2><h2 id="��-heap-��ջ-stack-�ͷ�����-method"><a href="#��-heap-��ջ-stack-�ͷ�����-method" class="headerlink" title="��(heap)��ջ(stack)�ͷ�����(method)"></a>��(heap)��ջ(stack)�ͷ�����(method)</h2><h3 id="����"><a href="#����" class="headerlink" title="����:"></a>����:</h3><p>1.�洢��ȫ���Ƕ���ÿ�����󶼰���һ����֮��Ӧ��class����Ϣ��(class��Ŀ���ǵõ�����ָ��)<br>2.jvmֻ��һ������(heap)�������̹߳������в���Ż������ͺͶ������ã�ֻ��Ŷ�����</p>
-<h3 id="ջ��"><a href="#ջ��" class="headerlink" title="ջ��:"></a>ջ��:</h3><p>1.ÿ���̰߳���һ��ջ����ջ��ֻ��������������͵Ķ�����Զ�����������(���Ƕ���)�����󶼴���ڶ�����<br>2.ÿ��ջ�е�����(ԭʼ���ͺͶ�������)����˽�еģ�����ջ���ܷ��ʡ�<br>3.ջ��Ϊ3�����֣��������ͱ�������ִ�л��������ġ�����ָ����(��Ų���ָ��)��</p>
-<h3 id="������"><a href="#������" class="headerlink" title="������:"></a>������:</h3><p>1.�ֽо�̬��������һ���������е��̹߳���<br>2.�������а����Ķ�����������������ԶΨһ��Ԫ�أ���class��static������</p>
-<h2 id="�������ջ���-GC"><a href="#�������ջ���-GC" class="headerlink" title="�������ջ���(GC)"></a>�������ջ���(GC)</h2><p>�����ռ�������ָjvm�����ͷ���Щ����ʹ�õĶ�����ռ�õ��ڴ档</p>
-<p>����ԭ��:</p>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>jvm知识点小结之一</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/highlight.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"></head><body><nav class="main-nav"><a href="/">首页</a><a href="/archives">归档</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>Fairy</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>jvm知识点小结之一</h1><h2 class="headline">Jun 16, 2018 9:31·992 words
+·4 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类的实例化顺序"><span class="toc-text">类的实例化顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM的内存可分为3个区："><span class="toc-text">JVM的内存可分为3个区：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#堆-heap-、栈-stack-和方法区-method"><span class="toc-text">堆(heap)、栈(stack)和方法区(method)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#堆区"><span class="toc-text">堆区:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈区"><span class="toc-text">栈区:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区"><span class="toc-text">方法区:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收机制-GC"><span class="toc-text">垃圾回收机制(GC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存优化"><span class="toc-text">内存优化</span></a></li></ol></li></ol></div><section id="post-body"><h2 id="类的实例化顺序"><a href="#类的实例化顺序" class="headerlink" title="类的实例化顺序"></a>类的实例化顺序</h2><p>1.父类的静态变量和静态代码块<br>2.执行子类的静态变量和静态代码块<br>3.执行父类的成员变量赋值<br>4.执行父类的构造代码块<br>5.执行父类的构造方法（）<br>6.执行子类的构造代码块<br>7.执行子类的构造方法（）；</p>
+<h2 id="JVM的内存可分为3个区："><a href="#JVM的内存可分为3个区：" class="headerlink" title="JVM的内存可分为3个区："></a>JVM的内存可分为3个区：</h2><h2 id="堆-heap-、栈-stack-和方法区-method"><a href="#堆-heap-、栈-stack-和方法区-method" class="headerlink" title="堆(heap)、栈(stack)和方法区(method)"></a>堆(heap)、栈(stack)和方法区(method)</h2><h3 id="堆区"><a href="#堆区" class="headerlink" title="堆区:"></a>堆区:</h3><p>1.存储的全部是对象，每个对象都包含一个与之对应的class的信息。(class的目的是得到操作指令)<br>2.jvm只有一个堆区(heap)被所有线程共享，堆中不存放基本类型和对象引用，只存放对象本身</p>
+<h3 id="栈区"><a href="#栈区" class="headerlink" title="栈区:"></a>栈区:</h3><p>1.每个线程包含一个栈区，栈中只保存基础数据类型的对象和自定义对象的引用(不是对象)，对象都存放在堆区中<br>2.每个栈中的数据(原始类型和对象引用)都是私有的，其他栈不能访问。<br>3.栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区:"></a>方法区:</h3><p>1.又叫静态区，跟堆一样，被所有的线程共享。<br>2.方法区中包含的都是在整个程序中永远唯一的元素，如class，static变量。</p>
+<h2 id="垃圾回收机制-GC"><a href="#垃圾回收机制-GC" class="headerlink" title="垃圾回收机制(GC)"></a>垃圾回收机制(GC)</h2><p>垃圾收集机制是指jvm用于释放那些不再使用的对象所占用的内存。</p>
+<p>工作原理:</p>
 <blockquote>
-<p>���ü���,��Ǹ���”���ü���”��һ�ּ򵥵��ٶȺ������������ռ���.���ж�����һ�����ü�����,������������ʱ��������1,�������뿪������ʱ���߱�����NULLʱ,������-1,�����������������а����������õ��б��Ͻ��б���,������ĳ����������ü���Ϊ0ʱ,���ͷ�ռ�õĿռ�.”��Ǹ���”�����л���,�������������������������õ��б�,�����ִ��Ķ�������ʱ���ϱ��,���������������ж������ò����ϱ�ǵ�ʱ��,ִ����������,��û�б�ǵĶ���ѿռ��ͷ�.</p>
+<p>引用计数:标记复制”引用计数”是一种简单但速度很慢的垃圾回收技术.所有对象都有一个引用计数器,当有引用连接时计数器加1,当引用离开作用域时或者被置于NULL时,计数器-1,垃圾回收器会在所有包含对象引用的列表上进行遍历,当发现某个对象的引用计数为0时,就释放占用的空间.”标记复制”的运行机制,垃圾回收器遍历包含所有引用的列表,当发现存活的对象引用时做上标记,这样当遍历完所有对象引用并做上标记的时候,执行垃圾回收,将没有标记的对象堆空间释放.</p>
 </blockquote>
-<h3 id="�ڴ��Z�"><a href="#�ڴ��Z�" class="headerlink" title="�ڴ��Ż�"></a>�ڴ��Ż�</h3><p>1.�ڴ�����Ĵ���,һ�������ڴ��������,��ʱӦ���Ż�����:</p>
-<blockquote>
-</blockquote>
-<p>��һ��������ѭ������ϸ�����򣬷�ֹ������ѭ�������ǱȽ����׼��ġ�</p>
+<h3 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h3><p>1.内存溢出的错误,一般是由于代码产生的,此时应该优化程序:</p>
 <blockquote>
 </blockquote>
-<p>�ڶ��������ʵ��ֶ�������������ʹ����System.gc()��Runtime.gc()��</p>
+<p>第一，避免死循环。仔细检查程序，防止出现死循环，这是比较容易检查的。</p>
 <blockquote>
 </blockquote>
-<p>������Ӧ�ü�ʱ�ͷŸ�����Դ���ڴ�, ���ݿ�ĸ������ӡ��ͷ���Դ��ʱ����������java�������Զ����ջ��ƣ����Ҳ��Ҫ��finalize��������Ϊ���õ�Ԫ���ղ���һ����ȫ����ȷ���Ĺ��̣���Ϊ�����ȼ����̣�������ϵͳû���ڴ�ʱ�ŵ����������ս��̡�</p>
-<p>2.����jvm���ڴ��С</p>
+<p>第二，可以适当手动回收垃圾，即使调用System.gc()或Runtime.gc()。</p>
 <blockquote>
 </blockquote>
-<p>һ������������JVM�Ķ�ջ�ڴ���漰�������ĸ�������</p>
+<p>第三，应该及时释放各种资源：内存, 数据库的各种连接。释放资源的时候不能依赖于java的垃圾自动回收机制，最好也不要用finalize方法，因为无用单元回收不是一个完全可以确定的过程，作为低优先级进程，往往是系统没有内存时才调用垃圾回收进程。</p>
+<p>2.增加jvm的内存大小</p>
+<blockquote>
+</blockquote>
+<p>一般来讲，设置JVM的堆栈内存会涉及到下面四个参数：</p>
 <blockquote>
 </blockquote>
 <ul>
-<li>Xmx     ����Java Heap���ֵ����-Xmx128m ��Ĭ��ֵΪ�����ڴ��1/4�������ֵӦ���������ڴ��С��������������ڴ濪��������</li>
-<li>Xms     ����Java Heap��ʼֵ����-Xms64m �� Server��JVM��ý�-Xms��-Xmx��Ϊ��ֵͬ���������Ի�JVM���Ա���Ĭ��ֵ��</li>
-<li>Xmn     ����Java Heap Young����С����-Xmn32m �� ����Ϥ��ñ���Ĭ��ֵ��</li>
-<li>Xss      ����ÿ���̵߳�Stack��С����-Xss16m �� ����Ϥ��ñ���Ĭ��ֵ��<blockquote>
+<li>Xmx     设置Java Heap最大值，如-Xmx128m ，默认值为物理内存的1/4，最佳设值应该视物理内存大小及计算机内其他内存开销而定；</li>
+<li>Xms     设置Java Heap初始值，如-Xms64m ， Server端JVM最好将-Xms和-Xmx设为相同值，开发测试机JVM可以保留默认值；</li>
+<li>Xmn     设置Java Heap Young区大小，如-Xmn32m ， 不熟悉最好保留默认值；</li>
+<li>Xss      设置每个线程的Stack大小，如-Xss16m ， 不熟悉最好保留默认值；<blockquote>
 </blockquote>
-�������������Ǹ��Ƕ�ջ�ڴ��йصģ�<blockquote>
+还有两个参数是跟非堆栈内存有关的：<blockquote>
 </blockquote>
 </li>
-<li>XX:PermSize             ���÷Ƕ��ڴ��ʼ��С����-XX:PermSize=56m��Ĭ���������ڴ��1/6 ��</li>
-<li>XX:MaxPermSize       �������Ƕ��ڴ�Ĵ�С����-XX:MaxPermSize=128m��Ĭ���������ڴ��1/4 ��</li>
+<li>XX:PermSize             设置非堆内存初始大小，如-XX:PermSize=56m，默认是物理内存的1/6 ；</li>
+<li>XX:MaxPermSize       设置最大非堆内存的大小，如-XX:MaxPermSize=128m，默认是物理内存的1/4 ；</li>
 </ul>
 </section><nav id="post-nav"><span class="prev"></span><span class="next"><a href="/2018/06/10/Oracle常用指令/">Older Posts<span class="arrow">→</span></a></span></nav></article></section><footer id="footer"><div id="social"><a class="symbol" href="https://github.com/fairyll"><i class="fa fa-github"></i></a></div><p class="small">因果也是种选择 &nbsp<i class="fa fa-heart" aria-hidden="true">&nbsp Fairy</i></p></footer></body></html>
