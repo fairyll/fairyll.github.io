@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>POJO和JavaBean的区别</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/highlight.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"></head><body><nav class="main-nav"><a href="/">首页</a><a href="/archives">归档</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>Fairy</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>POJO和JavaBean的区别</h1><h2 class="headline">Apr 06, 2018 12:00·1,606 words
+·6 minutes read<span class="tags"></span></h2></header><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#POJO"><span class="toc-text">POJO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaBean"><span class="toc-text">JavaBean</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POJO和JavaBean的区别"><span class="toc-text">POJO和JavaBean的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></div><section id="post-body"><p>详细介绍POJO和JavaBean以及它们的区别</p>
+<h2 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h2><p>POJO（Plain Ordinary Java Object）：简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称，而且简称比较直接.。其中有一些属性及其getter/setter方法的类，没有业务逻辑，有时可以作为VO（value -object）或DTO（Data Transform Object）来使用，如果有一个简单的运算属性也可，但不允许有业务方法，也不能携带有connection之类的方法。</p>
+<p>POJO是一个简单的普通的Java对象，它不包含业务逻辑或持久逻辑等，但不是JavaBean、EntityBean等，不具有任何特殊角色和不继承或不实现任何其它Java框架的类或接口。</p>
+<p>POJO主要用来指代那些没用遵从特定的Java对象模型，约定或框架如EJB的Java对象，一个POJO是一个不受任何限制的Java对象（除了Java语言规范）。例如一个POJO不应该是:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扩展预定的类，如：public class Foo extends javax.servlet.http.HttpServlet { …<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实现预定的接口，如：public class Bar implements javax.ejb.EntityBean { …<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包含预定的标注，如：@javax.ejb.Entity public class Baz{ …</p>
+<p>POJO实质上可以理解为简单的实体类，顾名思义POJO类的作用是方便程序员使用数据库中的数据表，对于广大的程序员可以很方便的将POJO类当做对象来进行使用，当然也是可以方便的调用其getXxx，setXxx方法。POJO类也给我们在struts框架中的配置带来了很大的方便。</p>
+<h2 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h2><p>JavaBean是一种Java语言写成的可重用组件。为写成JavaBean，类必须是具体的和公共的，并且具有无参数的构造器。JavaBean通过提供符合一致性设计模式的公共方法将内部域暴露成员属性，setXxx/getXxx方法获取。属性名称符合这种模式，其他Java类可以通过自省机制（反射机制）发现和操作这些JavaBean的属性。</p>
+<p>当然，它的方法命名、构造及行为也必须符合特定的约定：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类必须有一个公共的缺省构造函数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类的属性使用getter和setter来访问，其他方法遵从标准命名规范。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类应是可序列化的。 </p>
+<p>因为这些要求主要是靠约定而不是靠实现接口，所以许多开发者把JavaBean看作遵从特定命名约定的POJO。 简而言之：当一个Pojo可序列化，有一个无参的构造函数，使用getter和setter方法来访问属性时，他就是一个JavaBean。</p>
+<h2 id="POJO和JavaBean的区别"><a href="#POJO和JavaBean的区别" class="headerlink" title="POJO和JavaBean的区别"></a>POJO和JavaBean的区别</h2><p>POJO和JavaBean是常见且容易混淆的两个关键字</p>
+<p>具有一部分getter/setter方法的类就可以称作为POJO，但是JavaBean比POJO复杂，JavaBean是可复用的组件，对JavaBean并没有严格的规范，理论上讲任何一个Java类都可以是一个Bean 。但通常情况下由于JavaBean是被容器所创建（例如Tomcat）的，所以JavaBean应具有一个无参的构造器，另外通常JavaBean还要实现Serializable接口用于实现Bean的持久性，JavaBean是不能被跨进程访问的。</p>
+<p>JavaBean是一种组件技术，就好像你做了一个扳子，而这个扳子会在很多地方被拿去用，这个扳子也提供多种功能（你可以拿这个扳子扳、锤、撬等等），而这个扳子就是一个组件。</p>
+<p>一般在web应用程序中建立一个数据库的映射对象时，就只能称它为POJO。</p>
+<p><strong>错误的认识</strong><br>POJO是这样的一种“纯粹的”JavaBean，在它里面除了JavaBean规范的方法和属性没有别的东西，即private属性以及对这个属性方法的public的get和set方法。我们会发现这样的JavaBean很“单纯”，它只能装载数据，作为数据存储的载体，而不具有业务逻辑处理的能力。</p>
+<p><strong>真正的意思</strong><br>POJO = “Plain Old Java Object”，是MartinFowler等发明的一个术语，用来表示普通的Java对象，不是JavaBean, EntityBean 或者 SessionBean。POJO不担当任何特殊的角色，也不实现任何特殊的Java框架的接口如，EJB，JDBC等等。</p>
+<p>即POJO是一个简单的普通的Java对象，它不包含业务逻辑或持久逻辑等，但不是JavaBean、EntityBean等，不具有任何特殊角色和不继承或不实现任何其它Java框架的类或接口。</p>
+<p>下面是摘自Martin Fowler个人网站的一句话：</p>
+<p><strong>“We wondered why people were so against using regular objects in their systems and concluded that it was because simple objects lacked a fancy name. So we gave them one, and it’s caught on very nicely.”－－Martin Fowler</strong></p>
+<p>我们疑惑为什么人们不喜欢在他们的系统中使用普通的对象，我们得到的结论是——普通的对象缺少一个响亮的名字，因此我们给它们起了一个，并且取得了很好的效果。——Martin Fowler</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>POJO：</strong></p>
+<ol>
+<li><p>POJO对象有时也被称为Data对象，大量应用于表现现实中的对象</p>
+</li>
+<li><p>如果项目中使用了Hibernate框架，有一个关联的xml文件，使对象与数据库中的表对应，对象的属性与表中的字段相对应</p>
+</li>
+<li><p>POJO类的作用是方便程序员使用数据库中的数据表</p>
+</li>
+<li><p>POJO = “Plain Old Java Object”，用来表示普通的Java对象，不是JavaBean, EntityBean 或者 SessionBean</p>
+</li>
+<li><p>POJO不担当任何特殊的角色，也不实现任何特殊的Java框架的接口如：EJB、JDBC等等</p>
+</li>
+</ol>
+<p><strong>JavaBean：</strong></p>
+<ol>
+<li><p>是一种JAVA语言写成的可重用组件，其方法命名、构造、行为符合一定的约定</p>
+</li>
+<li><p>必须有一个公共的缺省构造函数</p>
+</li>
+<li><p>属性使用getter和setter来访问，其他方法遵从标准命名规范</p>
+</li>
+<li><p>可序列化的（实现serializable接口）</p>
+</li>
+<li><p>Java:Bean是不能被跨进程访问的</p>
+</li>
+</ol>
+<p><strong>一般在web应用程序中建立一个数据库的映射对象时称它为POJO，JavaBean比POJO复杂很多。</strong></p>
+<p><strong>POJO的格式用于数据的临时传递，它只能装在数据，作为数据存储的载体，而不具有业务逻辑处理的能力。</strong></p>
+<p><strong>JavaBean虽然数据的获取与POJO一样，但是JavaBean当中可以有其它的方法。</strong><br><br><br>参考资料：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://baike.baidu.com/item/POJO/3311958" target="_blank" rel="noopener">POJO与JavaBean的区别</a><br><br><br></p>
+</section><nav id="post-nav"><span class="prev"><a href="/2018/06/09/集合接口中用的较多的底层实现/"><span class="arrow">←</span>Newer Posts</a></span><span class="next"></span></nav></article></section><footer id="footer"><div id="social"><a class="symbol" href="https://github.com/fairyll"><i class="fa fa-github"></i></a></div><p class="small">因果也是种选择 &nbsp<i class="fa fa-heart" aria-hidden="true">&nbsp Fairy</i></p></footer></body></html>
