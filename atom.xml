@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Fairy</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-08-09T08:54:58.995Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Fairy</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AOP的理解</title>
+    <link href="http://yoursite.com/2018/07/19/AOP%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/07/19/AOP的理解/</id>
+    <published>2018-07-18T16:00:00.000Z</published>
+    <updated>2018-08-09T08:54:58.995Z</updated>
+    
+    <content type="html"><![CDATA[<p>详细介绍AOP概念理解以及作用</p><h3 id="AOP：面向切面编程"><a href="#AOP：面向切面编程" class="headerlink" title="AOP：面向切面编程"></a>AOP：面向切面编程</h3><p>在软件业，AOP为Aspect Oriented Programming的缩写，意为：<strong>面向切面编程</strong>，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。</p><p>AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。</p><p>利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p><p>AOP是一个概念，并没有设定具体语言的实现，它能克服那些只有单继承特性语言的缺点，Spring2.0之后整合AspectJ第三方AOP技术。</p><p>AspectJ是一个面向切面的框架，它扩展了Java语言。AspectJ定义了AOP语法所以它有一个专门的编译器用来生成遵守Java字节编码规范的Class文件。</p><h3 id="AOP自我理解"><a href="#AOP自我理解" class="headerlink" title="AOP自我理解"></a>AOP自我理解</h3><p>以上来自百度百科，理解起来还是比较笼统的，下面来谈谈自己的理解</p><h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><p>首先说说框架：因为到目前软件系统发展到今天已经很复杂了，特别是服务器端软件，涉及到的知识，内容，问题太多。在某些方面使用别人成熟的框架，就相当于让别人帮你完成一些基础工作，你只需要集中精力完成系统的业务逻辑设计。而且框架一般是成熟，稳健的，他可以处理系统很多细节问题，比如，事务处理，安全性，数据流控制等问题。还有框架一般都经过很多人使用，所以结构很好，扩展性也很好，而且它是不断升级的，你可以直接享受别人升级代码带来的好处。  </p><h4 id="两个目的"><a href="#两个目的" class="headerlink" title="两个目的"></a>两个目的</h4><p><strong>所以就有一个很浅显的道理，在编程中所用到的框架、思想或者技术等基本上都是基于两个目的：</strong></p><ol><li>提高项目开发效率（编程、测试、上线），它可以让开发人员使用更少的代码量完成同样的功能实现，并且在安全、稳健、结构、事务等性能方面有卓越表现。</li><li>便于项目上线后的维护，使用框架或者某个技术后，程序就能具有更好的结构，以便于后期的升级与维护，同样能让开发人员使用更少的代码量完成同样的功能实现。</li></ol><p><strong>理解了这个问题后，就可以了解AOP的功能以及在哪能够节省代码</strong></p><h4 id="理解AOP"><a href="#理解AOP" class="headerlink" title="理解AOP"></a>理解AOP</h4><p><strong>AOP即面向切面编程，能在不影响原有功能的前提下，为程序提供横向扩展的功能</strong></p><h4 id="横向扩展"><a href="#横向扩展" class="headerlink" title="横向扩展"></a>横向扩展</h4><p>横向扩展：理解了这个词基本就能理解AOP</p><p>软件开发可分为”持久层”，”业务层”，”控制器层”</p><p>所谓的”横向”就是指上面说到的三个层里的任意一层</p><p>使用AOP技术后，用一个方法，就能同时作用与一个层面内所有方法</p><h4 id="在哪节省代码？"><a href="#在哪节省代码？" class="headerlink" title="在哪节省代码？"></a>在哪节省代码？</h4><p>举个栗子</p><p>写日志是一个很好的编程习惯，不用AOP技术的话实现：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;方法开始执行&quot;);</span><br><span class="line">public void a()&#123;</span><br><span class="line">    System.out.println(&quot;执行方法&quot;);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(&quot;方法执行成功&quot;);</span><br></pre></td></tr></table></figure><p>上述是一个很简单的日志，虽然只有两行代码也不多</p><p>可是在开发中，面对100个甚至1000个方法时，这样写的话会不会被累死？</p><p>但如果用AOP的话，用一个方法就可以搞定所有的日志</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//指定要监控的bean中的方法</span><br><span class="line">@Around(&quot;bean(*Service)&quot;)</span><br><span class="line">//参数的意思是代理执行原软件中的方法</span><br><span class="line">public Object testObject(ProceedingJoinPoint jp) throws Throwable&#123; </span><br><span class="line">//在方法执行之前执行</span><br><span class="line">System.out.println(jp.getSignature()+&quot;开始执行&quot;);</span><br><span class="line">Object val = jp.proceed();</span><br><span class="line">//在方法执行之后执行</span><br><span class="line">System.out.println(jp.getSignature()+&quot;执行成功&quot;);</span><br><span class="line">return val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>现在所有业务层的方法执行前后都会打出对应日志了</p><p>一个方法搞定了需要机械重复的复制粘贴几百行的工作，节省的代码有一碗饭这么多啊有木有</p><h3 id="AOP作用和优势"><a href="#AOP作用和优势" class="headerlink" title="AOP作用和优势"></a>AOP作用和优势</h3><p>显然刚刚的栗子足以说明AOP的优势，当然开发中不止记录日志那么简单</p><h4 id="AOP主要功能"><a href="#AOP主要功能" class="headerlink" title="AOP主要功能"></a>AOP主要功能</h4><p>日志记录，性能统计，安全控制，事务处理，异常处理等</p><h4 id="AOP主要目的"><a href="#AOP主要目的" class="headerlink" title="AOP主要目的"></a>AOP主要目的</h4><p>将日志记录，性能统计，安全控制，事务处理，异常处理等代码从业务逻辑代码中划分出来，通过对这些行为的分离，我们希望可以将它们独立到非指导业务逻辑的方法中，进而改变这些行为的时候不影响业务逻辑的代码。</p><h4 id="AOP优势"><a href="#AOP优势" class="headerlink" title="AOP优势"></a>AOP优势</h4><p>AOP技术的优势是显而易见的。在面向对象的世界里，人们提出了各种方法和设计原则来保障系统的可复用性与可扩展性，以期建立一个松散耦合、便于扩展的软件系统。例如GOF提出的“设计模式”，为我们提供了设计的典范与准则。设计模式通过最大程度的利用面向对象的特性，诸如利用继承、多态，对责任进行分离、对依赖进行倒置，面向抽象，面向接口，最终设计出灵活、可扩展、可重用的类库、组件，乃至于整个系统的架构。在设计的过程中，通过各种模式体现对 象的行为、暴露的接口、对象间关系、以及对象分别在不同层次中表现出来的形态。然而鉴于对象封装的特殊性，“设计模式”的触角始终在接口与抽象中大做文 章，而对于对象内部则无能为力。</p><p>通过”横切”技术，AOP技术就能深入到对象内部翻云覆雨，截取方法之间传递的消息为我所用。由于将核心关注点与横切关注点完全隔离，使得我们能够独立的对”方面”编程。它允许开发者动态地修改静态的OO模型，构造出一个能够不断增长以满足新增需求的系统，就象现实世界中的对象会在其生命周期中不断改变自身，应用程序也可以在发展中拥有新的功能。</p><p><strong>那么设计软件系统时应用AOP技术，其优势在于：</strong></p><ol><li>在定义应用程序对某种服务（例如日志）的所有需求的时候。通过识别关注点，使得该服务能够被更好的定义，更好的被编写代码，并获得更多的功能。这种方式还能够处理在代码涉及到多个功能的时候所出现的问题，例如改变某一个功能可能会影响到其它的功能，在AOP中把这样的麻烦称之为”纠结（tangling）”。</li><li>利用AOP技术对离散的方面进行的分析将有助于为开发团队指定一位精于该项工作的专家。负责这项工作的最佳人选将可以有效利用自己的相关技能和经验。</li><li>持久性。标准的面向对象的项目开发中，不同的开发人员通常会为某项服务编写相同的代码，例如日志记录。随后他们会在自己的实施中分别对日志进行处理以满足不同单个对象的需求。而通过创建一段单独的代码片段，AOP提供了解决这一问题的持久简单的方案，这一方案强调了未来功能的重用性和易维护性：不需要在整个应用程序中一遍遍重新编写日志代码，AOP使得仅仅编写日志方面（logging aspect）成为可能，并且可以在这之上为整个应用程序提供新的功能。</li></ol><p><strong>总而言之，AOP技术的优势使得需要编写的代码量大大缩减，节省了时间，控制了开发成本。同时也使得开发人员可以集中关注于系统的核心商业逻辑。此外，它更利于创建松散耦合、可复用与可扩展的大型软件系统。</strong></p><h3 id="AOP与OOP区别与联系"><a href="#AOP与OOP区别与联系" class="headerlink" title="AOP与OOP区别与联系"></a>AOP与OOP区别与联系</h3><p>OOP（面向对象编程）针对业务处理过程的实体及其属性和行为进行抽象封装，以获得更加清晰高效的逻辑单元划分。</p><p>AOP则是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，以获得逻辑过程中各部分之间低耦合性的隔离效果。这两种设计思想在目标上有着本质的差异。</p><p><strong>换而言之，OOD/OOP面向名词领域，AOP面向动词领域。</strong></p><p>AOP可以说是OOP的补充和完善。OOP引入封装、继承和多态性等概念来建立一种对象层次结构，用以模拟公共行为的一个集合。当我们需 要为分散的对象引入公共行为的时候，OOP则显得无能为力。也就是说，<strong>OOP允许你定义从上到下的关系，但并不适合定义从左到右的关系</strong>。例如日志功能。日 志代码往往水平地散布在所有对象层次中，而与它所散布到的对象的核心功能毫无关系。对于其他类型的代码，如安全性、异常处理和透明的持续性也是如此。这种 散布在各处的无关的代码被称为横切（cross-cutting）代码，在OOP设计中，它导致了大量代码的重复，而不利于各个模块的重用。</p><p>而AOP技术则恰恰相反，它利用一种称为“横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其名为 “Aspect”，即方面。所谓“方面”，简单地说，就是将那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低 模块间的耦合度，并有利于未来的可操作性和可维护性。AOP代表的是一个横向的关系，如果说“对象”是一个空心的圆柱体，其中封装的是对象的属性和行为；那么面向方面编程的方法，就仿佛一把利刃，将这些空心圆柱体剖开，以获得其内部的消息。而剖开的切面，也就是所谓的“方面”了。然后它又以巧夺天功的妙手将这些剖开的切面复原，不留痕迹。</p><h3 id="AOP实现"><a href="#AOP实现" class="headerlink" title="AOP实现"></a>AOP实现</h3><p>AOP分为静态AOP和动态AOP。静态AOP是指AspectJ实现的AOP，他是将切面代码直接编译到Java类文件中。动态AOP是指将切面代码进行动态织入实现的AOP。Spring的AOP为动态AOP，实现的技术为： JDK提供的动态代理技术 和 CGLIB(动态字节码增强技术) </p><p><strong>所以实现AOP的技术，主要分为两大类：</strong></p><ol><li>采用<strong>动态代理技术</strong>，利用截取消息的方式，对该消息进行装饰，以取代原有对象行为的执行</li><li>采用<strong>静态织入</strong>，引入特定的语法创建“方面”，从而使得编译器可以在编译期间织入有关“方面”的代码。</li></ol><p><strong>然而殊途同归，实现AOP的技术特性却是相同的，分别为：</strong></p><ol><li>目标对象target：指的是需要被增强的对象，由于spring aop是通过代理模式实现，从而这个对象永远是被代理对象。</li><li><p>连接点join point：所谓连接点是指那些被拦截到的点，在spring中这些点指的是方法，因为spring只支持方法类型的连接点</p></li><li><p>切入点pointcut：表示一组 join point，这些 join point 或是通过逻辑关系组合起来，或是通过通配、正则表达式等方式集中起来，它定义了相应的 Advice 将要发生的地方，简单说切入点是指我们要对哪些连接点进行拦截的定义</p></li><li><p>通知advice：所谓通知是指拦截到连接点之后所要做的事情就是通知，通知分为前置通知，后置通知，异常通知，最终通知，环绕通知。Advice 定义了在 pointcut 里面定义的程序点具体要做的操作</p></li><li><p>引介introduction：引介是一种特殊的通知，在不修改类代码的前提下，introduction可以在运行期为类动态地添加一些方法或属性</p></li><li><p>切面aspect：是切入点和通知的结合</p></li><li><p>织入weaving：织入是一个过程，是将切面应用到目标对象从而创建出AOP代理对象的过程，织入可以在编译期，类装载期，运行期进行。Spring采用动态织入，而aspectj采用静态织入</p></li><li><p>代理Proxy：一个类被AOP织入增强后，就产生一个结果代理类</p></li></ol><p><strong>简单点说：</strong></p><ul><li><p>目标对象target：被代理增强的对象</p></li><li><p>连接点join point：被拦截到的方法</p></li><li><p>切入点(pointcut)：被拦截到的方法当中可以插入的增强的方法</p></li><li><p>通知(advice)：增强的代码</p></li><li><p>引介introduction：作用在类上，可以为一个类增加属性和方法</p></li><li><p>切面aspect：通知和切点的结合，指定把什么（增强）插入到哪里（切点）去</p></li><li><p>织入weaving：通知插入到切点的过程</p></li><li><p>代理Proxy：通知插入到切点是通过代理完成的</p></li></ul><p><strong>上述的技术特性组成了基本的AOP技术，大多数AOP工具均实现了这些技术。它们也可以是研究AOP技术的基本术语。</strong></p><hr><p>至于Spring是如何整合AOP的，以后再详细写写</p><p><br><br>参考资料：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://baike.baidu.com/item/AOP/1332219" target="_blank" rel="noopener">百度百科 - AOP </a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.cnblogs.com/jingzhishen/p/4980551.html" target="_blank" rel="noopener">AOP面向切面编程</a></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://blog.csdn.net/mggwct/article/details/54893371" target="_blank" rel="noopener">Spring AOP两种方式实现</a></p><p><br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;详细介绍AOP概念理解以及作用&lt;/p&gt;
+&lt;h3 id=&quot;AOP：面向切面编程&quot;&gt;&lt;a href=&quot;#AOP：面向切面编程&quot; class=&quot;headerlink&quot; title=&quot;AOP：面向切面编程&quot;&gt;&lt;/a&gt;AOP：面向切面编程&lt;/h3&gt;&lt;p&gt;在软件业，AOP为Aspect
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>随笔二</title>
+    <link href="http://yoursite.com/2018/07/04/%E9%9A%8F%E7%AC%94%E4%BA%8C/"/>
+    <id>http://yoursite.com/2018/07/04/随笔二/</id>
+    <published>2018-07-04T13:24:00.384Z</published>
+    <updated>2018-07-04T13:31:21.639Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="我只顾着喜欢你，却忘了我们不适合。"><a href="#我只顾着喜欢你，却忘了我们不适合。" class="headerlink" title="我只顾着喜欢你，却忘了我们不适合。"></a>我只顾着喜欢你，却忘了我们不适合。</h1><hr><p>不知从什么时候开始</p><p>每当听老歌之时</p><p>忽然也会晃了神</p><p>上课时候偷偷听</p><p>甚至脑海里还会浮现一个人的身影</p><hr><p>真怀念少年时期那种单纯的喜欢啊</p><p>光看一眼，春意萌动</p><p>能够傻乎乎地乐呵一整天</p><p>直到长大后</p><p>似乎我们每个人都要经历一段变味的恋爱</p><hr><p>到了最后</p><p>一句不合适就结束了全部</p><p>嗯，正所谓</p><p>有一点点满足</p><p>就准备如何结束</p><p>毕竟</p><p>谁还不是从笑着羡慕变成了哭着嫉妒</p><hr><p>既然如此，不合适就不合适吧</p><p>毕竟我也知道</p><p>喜欢不喜欢</p><p>跟合适不合适</p><p>压根就不是一回事</p><p>嗯，我就这么安慰自己的</p><hr><p>放屁！</p><p>两个人哪会有那么多合适不合适</p><p>说到底没有结果</p><p>还不是因为爱得不够</p><p>何必要推却责任呢？</p><hr><p>​                                                                             摘录于浪小妞公众号…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;我只顾着喜欢你，却忘了我们不适合。&quot;&gt;&lt;a href=&quot;#我只顾着喜欢你，却忘了我们不适合。&quot; class=&quot;headerlink&quot; title=&quot;我只顾着喜欢你，却忘了我们不适合。&quot;&gt;&lt;/a&gt;我只顾着喜欢你，却忘了我们不适合。&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;不知从什么
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>快速排序算法</title>
+    <link href="http://yoursite.com/2018/06/25/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/06/25/快速排序算法/</id>
+    <published>2018-06-25T03:14:28.091Z</published>
+    <updated>2018-07-06T00:24:26.127Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘录于百度百科.</p><h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>​    通过一趟排序将要排序的数据分割成独立的两部分 , 其中一部分的所有数据都比另外一部分的所有数据要小 , 然后在按此方法对这两部分数据分别进行快速排序 , 整个排序过程可以递归进行 , 以此达到整个数据变成有序序列.</p><p><strong>注意:快速排序不是一种稳定的排序算法,多个相同的值的相对位置也许会在算法结束时产生变动.</strong></p><h2 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h2><p>设要排序的数组是arr[0]…arr[n-1] , 首先任意选取一个数据(通常选用数组的第一个数arr[0])作为关键数据key , 然后将所有比它小的数都放在它前面 , 所有比它大的数都放在它的后面 , 这个过程称为一趟快速排序.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class　Quick</span><br><span class="line">&#123;</span><br><span class="line">　public　void　sort(int　arr[],int　low,int　high)&#123;</span><br><span class="line">     int　l=low;</span><br><span class="line">     int　h=high;</span><br><span class="line">     int　povit=arr[low];</span><br><span class="line"></span><br><span class="line">     while(l&lt;h)&#123;</span><br><span class="line">         while(l&lt;h&amp;&amp;arr[h]&gt;=povit)</span><br><span class="line">         h--;</span><br><span class="line">         if(l&lt;h)&#123;</span><br><span class="line">         int　temp=arr[h];</span><br><span class="line">         arr[h]=arr[l];</span><br><span class="line">         arr[l]=temp;</span><br><span class="line">         l++;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     while(l&lt;h&amp;&amp;arr[l]&lt;=povit)</span><br><span class="line">         l++;</span><br><span class="line"></span><br><span class="line">         if(l&lt;h)&#123;</span><br><span class="line">         int　temp=arr[h];</span><br><span class="line">         arr[h]=arr[l];</span><br><span class="line">         arr[l]=temp;</span><br><span class="line">         h--;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     print(arr);</span><br><span class="line">     System.out.print(&quot;l=&quot;+l+1)+&quot;h=&quot;+h+1)+&quot;povit=&quot;+povit+&quot;\n&quot;);</span><br><span class="line">     if(l&gt;low)sort(arr,low,l-1);</span><br><span class="line">     if(h&lt;high)sort(arr,l+1,high);</span><br><span class="line">　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;摘录于百度百科.&lt;/p&gt;
+&lt;h2 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a&gt;基本思想&lt;/h2&gt;&lt;p&gt;​    通过一趟排序将要排序的数据分割成独立的两部分 , 其中一部分的所有数据都比另外一部
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>随笔一</title>
+    <link href="http://yoursite.com/2018/06/22/%E9%9A%8F%E7%AC%94%E4%B8%80/"/>
+    <id>http://yoursite.com/2018/06/22/随笔一/</id>
+    <published>2018-06-22T09:26:36.507Z</published>
+    <updated>2018-07-06T00:25:37.232Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="因果也是一种循环"><a href="#因果也是一种循环" class="headerlink" title="因果也是一种循环"></a>因果也是一种循环</h1><h3 id="上辈子做了多少善事-这辈子才能如此好运"><a href="#上辈子做了多少善事-这辈子才能如此好运" class="headerlink" title="上辈子做了多少善事,这辈子才能如此好运"></a>上辈子做了多少善事,这辈子才能如此好运</h3><blockquote><p>“你说那些中了彩票的人,是不是上辈子烧了高香,不然咋这么好运呀!”<br>“不要太羡慕啦,反正轮不到我们的!”</p></blockquote><p><strong>因果是种循环,你种过什么样的因,就会结什么样的果,很奇妙,可信也可不信,全凭自己心意</strong></p><blockquote><p>是的 , 至少我到现在还没中过哪怕5块钱的彩票 ,<br>唯一的一次还让我的室友将我的彩票当做垃圾收拾了 , 也就没有兑奖了.<br><br>或许我的彩票运气在那次之后就没了吧,虽然还是会偶尔买个一注解一下馋.<br><br>能安全的在这个神魔共存的世间活到现在 , 我已经很庆幸了.<br><strong>还能遇见三两好友一直陪伴左右</strong><br>更让我觉得或许 我的运气 都用来遇见她(他)们了吧!</p></blockquote><h3 id="不知何时变得胆小谨慎"><a href="#不知何时变得胆小谨慎" class="headerlink" title="不知何时变得胆小谨慎"></a>不知何时变得胆小谨慎</h3><blockquote><p>“我想去外地闯一闯,见见世面”  - - - 什么都没准备 , 就这样冒冒然的开始了<br>“去吧 ! 混好了把我们也带一脚”</p></blockquote><hr><blockquote><p>“我还是想去外地 , 有前途”<br>“考虑好了吗?”<br>“还没 , 再看看吧 ,船到桥头自然直 , 别担心”</p></blockquote><hr><p><strong>时间还在继续 , 它从不为任何一个人放慢加快</strong></p><blockquote><p>短短二十年 , 除掉刚出生的懵懂无知 , 除掉叛逆时的不经大脑 , 除掉路途中的迷茫<br><br><strong>你有多少是你自己 …</strong><br></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;因果也是一种循环&quot;&gt;&lt;a href=&quot;#因果也是一种循环&quot; class=&quot;headerlink&quot; title=&quot;因果也是一种循环&quot;&gt;&lt;/a&gt;因果也是一种循环&lt;/h1&gt;&lt;h3 id=&quot;上辈子做了多少善事-这辈子才能如此好运&quot;&gt;&lt;a href=&quot;#上辈子做了多少善事-
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常见的设计模式</title>
+    <link href="http://yoursite.com/2018/06/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/06/20/设计模式/</id>
+    <published>2018-06-20T14:19:28.472Z</published>
+    <updated>2018-06-20T14:19:23.763Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-单例模式"><a href="#1-单例模式" class="headerlink" title="1.单例模式"></a>1.单例模式</h2><p>实现方式:</p><blockquote></blockquote><p>1.在本类内部创建一个私有的静态的本类实例为成员对象</p><blockquote></blockquote><p>2.提供公共的静态访问方法</p><p>应用场景:</p><blockquote><p>（1）资源共享的情况下，避免由于资源操作时导致的性能的损耗等。如数据库连接池的设计,日志文件，应用配置。</p></blockquote><p>（2）控制资源的情况下，方便资源之间的互相通信。如线程池等。</p><h2 id="2-工厂模式"><a href="#2-工厂模式" class="headerlink" title="2.工厂模式"></a>2.工厂模式</h2><p>就是建立一个工厂类，对实现了同一接口的一些类进行实例的创建。简单工厂模式的实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类（这些产品类继承自一个父类或接口）的实例。</p><p>实现方式:</p><blockquote></blockquote><p>1、工厂类角色：这是本模式的核心，含有一定的商业逻辑和判断逻辑。在java中它往往由一个具体类实现。</p><blockquote></blockquote><p>2、抽象产品角色：它一般是具体产品继承的父类或者实现的接口。在java中由接口或者抽象类来实现。</p><blockquote></blockquote><p>3、具体产品角色：工厂类所创建的对象就是此角色的实例。在java中由一个具体类实现。</p><p>应用场景:</p><blockquote></blockquote><p>1)当客户程序不需要知道对象的创建过程。</p><blockquote></blockquote><p>2)客户程序使用的对象存在变动的可能，或者根本就不知道使用哪一个具体的对象。</p><h2 id="3-代理模式"><a href="#3-代理模式" class="headerlink" title="3.代理模式"></a>3.代理模式</h2><p>代理模式的关键点是:代理对象与目标对象,代理对象是对目标对象的扩展,并会调用目标对象 </p><h3 id="1-组成"><a href="#1-组成" class="headerlink" title="1.组成"></a>1.组成</h3><pre><code>抽象角色:通过接口或抽象类声明真实角色实现的业务方法。代理角色：实现抽象角色，是真实角色的代理，通过真实角色的业务逻辑方法来实现抽象方法，并可以附加自己的操作。真实角色：实现抽象角色，定义真实角色所要实现的业务逻辑，供代理角色调用。</code></pre><h3 id="2-优点"><a href="#2-优点" class="headerlink" title="2.优点"></a>2.优点</h3><pre><code>(1).职责清晰:真实的角色就是实现实际的业务逻辑，不用关心其他非本职责的事务，通过后期的代理完成一件完成事务，附带的结果就是编程简洁清晰。(2).代理对象可以在客户端和目标对象之间起到中介的作用，这样起到了中介的作用和保护了目标对象的作用。(3).高扩展性</code></pre><h3 id="3-模式结构"><a href="#3-模式结构" class="headerlink" title="3.模式结构"></a>3.模式结构</h3><h4 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h4><pre><code>是由程序员创建或工具生成代理类的源码，再编译代理类。所谓静态也就是在程序运行前就已经存在代理类的字节码文件，代理类和委托类的关系在运行前就确定了。</code></pre><h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4><pre><code>是在实现阶段不用关心代理类，而在运行阶段才指定哪一个对象.</code></pre><p>应用场景:</p><blockquote></blockquote><p>（1）当我们想要隐藏某个类时，可以为其提供代理类</p><blockquote></blockquote><p>（2）当一个类需要对不同的调用者提供不同的调用权限时，可以使用代理类来实现（代理类不一定只有一个，我们可以建立多个代理类来实现，也可以在一个代理类中进行权限判断来进行不同权限的功能调用）</p><blockquote></blockquote><p>（3）当我们要扩展某个类的某个功能时，可以使用代理模式，在代理类中进行简单扩展</p><h2 id="4-装饰者模式"><a href="#4-装饰者模式" class="headerlink" title="4.装饰者模式"></a>4.装饰者模式</h2><p>使用条件：</p><blockquote></blockquote><p>1.增强的类和被增强的类实现相同的接口</p><blockquote></blockquote><p>2.在增强的类中获得被增强的类的引用</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-单例模式&quot;&gt;&lt;a href=&quot;#1-单例模式&quot; class=&quot;headerlink&quot; title=&quot;1.单例模式&quot;&gt;&lt;/a&gt;1.单例模式&lt;/h2&gt;&lt;p&gt;实现方式:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.在本类内部创建一个私有的
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jvm知识点小结之一</title>
+    <link href="http://yoursite.com/2018/06/16/jvm%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2018/06/16/jvm知识/</id>
+    <published>2018-06-16T13:31:32.070Z</published>
+    <updated>2018-06-16T13:38:34.757Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="类的实例化顺序"><a href="#类的实例化顺序" class="headerlink" title="类的实例化顺序"></a>类的实例化顺序</h2><p>1.父类的静态变量和静态代码块<br>2.执行子类的静态变量和静态代码块<br>3.执行父类的成员变量赋值<br>4.执行父类的构造代码块<br>5.执行父类的构造方法（）<br>6.执行子类的构造代码块<br>7.执行子类的构造方法（）；</p><h2 id="JVM的内存可分为3个区："><a href="#JVM的内存可分为3个区：" class="headerlink" title="JVM的内存可分为3个区："></a>JVM的内存可分为3个区：</h2><h2 id="堆-heap-、栈-stack-和方法区-method"><a href="#堆-heap-、栈-stack-和方法区-method" class="headerlink" title="堆(heap)、栈(stack)和方法区(method)"></a>堆(heap)、栈(stack)和方法区(method)</h2><h3 id="堆区"><a href="#堆区" class="headerlink" title="堆区:"></a>堆区:</h3><p>1.存储的全部是对象，每个对象都包含一个与之对应的class的信息。(class的目的是得到操作指令)<br>2.jvm只有一个堆区(heap)被所有线程共享，堆中不存放基本类型和对象引用，只存放对象本身</p><h3 id="栈区"><a href="#栈区" class="headerlink" title="栈区:"></a>栈区:</h3><p>1.每个线程包含一个栈区，栈中只保存基础数据类型的对象和自定义对象的引用(不是对象)，对象都存放在堆区中<br>2.每个栈中的数据(原始类型和对象引用)都是私有的，其他栈不能访问。<br>3.栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)。</p><h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区:"></a>方法区:</h3><p>1.又叫静态区，跟堆一样，被所有的线程共享。<br>2.方法区中包含的都是在整个程序中永远唯一的元素，如class，static变量。</p><h2 id="垃圾回收机制-GC"><a href="#垃圾回收机制-GC" class="headerlink" title="垃圾回收机制(GC)"></a>垃圾回收机制(GC)</h2><p>垃圾收集机制是指jvm用于释放那些不再使用的对象所占用的内存。</p><p>工作原理:</p><blockquote><p>引用计数:标记复制”引用计数”是一种简单但速度很慢的垃圾回收技术.所有对象都有一个引用计数器,当有引用连接时计数器加1,当引用离开作用域时或者被置于NULL时,计数器-1,垃圾回收器会在所有包含对象引用的列表上进行遍历,当发现某个对象的引用计数为0时,就释放占用的空间.”标记复制”的运行机制,垃圾回收器遍历包含所有引用的列表,当发现存活的对象引用时做上标记,这样当遍历完所有对象引用并做上标记的时候,执行垃圾回收,将没有标记的对象堆空间释放.</p></blockquote><h3 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h3><p>1.内存溢出的错误,一般是由于代码产生的,此时应该优化程序:</p><blockquote></blockquote><p>第一，避免死循环。仔细检查程序，防止出现死循环，这是比较容易检查的。</p><blockquote></blockquote><p>第二，可以适当手动回收垃圾，即使调用System.gc()或Runtime.gc()。</p><blockquote></blockquote><p>第三，应该及时释放各种资源：内存, 数据库的各种连接。释放资源的时候不能依赖于java的垃圾自动回收机制，最好也不要用finalize方法，因为无用单元回收不是一个完全可以确定的过程，作为低优先级进程，往往是系统没有内存时才调用垃圾回收进程。</p><p>2.增加jvm的内存大小</p><blockquote></blockquote><p>一般来讲，设置JVM的堆栈内存会涉及到下面四个参数：</p><blockquote></blockquote><ul><li>Xmx     设置Java Heap最大值，如-Xmx128m ，默认值为物理内存的1/4，最佳设值应该视物理内存大小及计算机内其他内存开销而定；</li><li>Xms     设置Java Heap初始值，如-Xms64m ， Server端JVM最好将-Xms和-Xmx设为相同值，开发测试机JVM可以保留默认值；</li><li>Xmn     设置Java Heap Young区大小，如-Xmn32m ， 不熟悉最好保留默认值；</li><li>Xss      设置每个线程的Stack大小，如-Xss16m ， 不熟悉最好保留默认值；<blockquote></blockquote>还有两个参数是跟非堆栈内存有关的：<blockquote></blockquote></li><li>XX:PermSize             设置非堆内存初始大小，如-XX:PermSize=56m，默认是物理内存的1/6 ；</li><li>XX:MaxPermSize       设置最大非堆内存的大小，如-XX:MaxPermSize=128m，默认是物理内存的1/4 ；</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;类的实例化顺序&quot;&gt;&lt;a href=&quot;#类的实例化顺序&quot; class=&quot;headerlink&quot; title=&quot;类的实例化顺序&quot;&gt;&lt;/a&gt;类的实例化顺序&lt;/h2&gt;&lt;p&gt;1.父类的静态变量和静态代码块&lt;br&gt;2.执行子类的静态变量和静态代码块&lt;br&gt;3.执行父类的成员变
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle数据库常用指令</title>
+    <link href="http://yoursite.com/2018/06/10/Oracle%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
+    <id>http://yoursite.com/2018/06/10/Oracle常用指令/</id>
+    <published>2018-06-10T01:44:54.160Z</published>
+    <updated>2018-05-29T11:13:04.876Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是Oracle"><a href="#什么是Oracle" class="headerlink" title="什么是Oracle?"></a>什么是Oracle?</h2><p>1.&nbsp;ORACLE 数据库系统是美国 ORACLE 公司（甲骨文）提供的以分布式数据库为核心的一组软件产品，是目前最流行的客户/服务器(CLIENT/SERVER)或B/S 体系结构的数据库之一。<br>2.&nbsp;ORACLE 通常应用于大型系统的数据库产品。<br>3.&nbsp;ORACLE 数据库是目前世界上使用最为广泛的数据库管理系统，作为一个通用的数据库系统，它具有完整的数据管理功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库它实现了分布式处理功能。</p><h2 id="表的简单操作"><a href="#表的简单操作" class="headerlink" title="表的简单操作."></a>表的简单操作.</h2><h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表:"></a>创建表:</h3><blockquote><p>create table 表名(<br>    &nbsp;字段名 类型(长度) primary key,<br>    &nbsp;字段名 类型(长度),<br>    &nbsp;…<br>)</p></blockquote><h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表:"></a>修改表:</h3><blockquote></blockquote><pre><code>添加字段:alter table 表名 add(列名 类型(长度) ,列名 类型(长度) ...)修改字段类型:alter table 表名 modify(列名 类型(长度) ,列名 类型(长度) ...)修改字段名:alter table 表名 rename column 原列名 to 新列名删除字段:alter table 表名 drop (列名1,列名2...)重命名表:alter table 旧表名 rename to 新表名</code></pre><h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表:"></a>删除表:</h3><blockquote></blockquote><pre><code>drop table 表名</code></pre><h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询:"></a>分页查询:</h2><blockquote></blockquote><pre><code>1.简单分页  rownum后只能跟&lt;或&lt;=例如:    得到第10到20的数据    select * from (select rownum r,t.* from 表名 t[表的别名] ) where r&gt;10;2.基于排序的分页  rownum是在表扫描时就产生了,排序需要在rownum产生后排序例如:    select * from     (select rownum r,t.* from (select * from 表名 order by 列名 desc ) t)     where r&gt;10;</code></pre><h2 id="单行函数"><a href="#单行函数" class="headerlink" title="单行函数:"></a>单行函数:</h2><h3 id="字符函数-dual-伪表-一行一列的一个表"><a href="#字符函数-dual-伪表-一行一列的一个表" class="headerlink" title="字符函数(dual:伪表,一行一列的一个表)"></a>字符函数(dual:伪表,一行一列的一个表)</h3><blockquote></blockquote><pre><code>1.求字符串长度    select length(&apos;abcd&apos;) from dual2.求字符串子串(原字符串,从第几位截取[从1开始],截取几个)    select substr(&apos;abcd&apos;,2&apos;2) from dual3.字符串拼接(可以嵌套拼接,concat:只能有两个参数)    select concat( concat(&apos;abc&apos;,&apos;d&apos;),&apos;ef&apos;)from dual或者直接拼接    select &apos;abc&apos;||&apos;d&apos;||&apos;ef&apos; from dual;</code></pre><h3 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h3><blockquote></blockquote><pre><code>1.四舍五入函数    select round(100.456) from dual; 从整数四舍五入    select round(100.456 , 2) from dual; 从小数点后两位四舍五入2.数字截取 (不带第二个参数,截取整数,带第二个参数,截取小数点后几位)    select trunc(100.567 , 2)from dual; 3.取模    select mod(10,4)from dual; </code></pre><h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><blockquote></blockquote><pre><code>1.加月函数 ADD_MONTHS : 在当前时间加上几个月    select add_months(sysdate,2[加两个月]) from dual;2.求所在月最后一天last_day    select last_day(sysdate) from dual;3.日期截取trunc [并不能按秒截取,只能截取到分钟]    select trunc(sysdate) from dual ; 按日截取,把时间截掉    select trunc(sysdate,&apos;mm&apos;) from dual; 按月截取,得到某月1日    select trunc(sysdate,&apos;yyyy&apos;) from dual;按年截取,得到某年1月1日</code></pre><h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3><blockquote></blockquote><pre><code>1.数字转字符串    select to_char(100) from dual;或拼接空串    select 100||&apos;&apos; from dual;2.日期转字符串(sysdate:当前日期)参数中不能包含中文,可以使用拼接    select to_char(sysdate , &apos;yyyy-mm-dd hh:mi:ss&apos;) from dual;3.字符串转日期 to_date    select to_date(&apos;2018-05-27&apos;,&apos;yyyy-mm-dd&apos;) from dual;4.字符串转数字    select to_number(&apos;100&apos;) from dual;或者加上0    select &apos;100&apos;+0 from dual;</code></pre><h3 id="其它函数"><a href="#其它函数" class="headerlink" title="其它函数"></a>其它函数</h3><blockquote><p>1.1.空值处理函数 NVL:当第一个值为null时,显示第二个值,不为null,则直接显示第一个值<br>    select nvl(null,0) from dual;<br>    1.2..空值处理函数 NVL2(a,0,100):当a为null,显示第三个参数,不为null,显示第二个参数<br>    select nvl2(maxnum,to_char(maxnum),’不限’) from dual;</p></blockquote><blockquote><p>2.条件取值 decode<br>    decode(条件 , 值1,翻译值1, 值2,翻译值2,…值n,翻译值n)<br>    <font color="red">如果条件后的值成对出现,有匹配的就返回翻译值,没有返回空</font><br>    <font color="red">如果条件后的值最后只有一个,则为缺省值,当前面都没有匹配,则显示缺省值<strong><br>    <font color="red">如果同时有两个值都可以匹配,则按照先后顺序,匹配前面的值</font></strong> </font></p></blockquote><blockquote><p>3.case语句sql1999(sql固有语法)<br>    select name,(case 条件<br>&nbsp; &nbsp; when 1 then ‘取值1’<br>&nbsp; &nbsp; when 2 then ‘取值2’<br>&nbsp; &nbsp; …<br>&nbsp; &nbsp; end)<br>…</p></blockquote><h3 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数:"></a>分析函数:</h3><blockquote></blockquote><pre><code>rank() over(order by xxx )       相同的值排名相同，排名跳跃dense_rank() over(order by xxx)  相同的值排名相同，排名连续row_number() over(order by xxx)  连续的排名，无论值是否相等</code></pre><h3 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算:"></a>集合运算:</h3><blockquote></blockquote><pre><code>集合运算就是将两个或者多个结果集组合成为一个结果集。集合运算包括：    UNION ALL(并集)，返回各个查询的所有记录，包括重复记录。    UNION(并集)，返回各个查询的所有记录，不包括重复记录。    INTERSECT(交集)，返回两个查询共有的记录。    MINUS(差集)，返回第一个查询检索出的记录减去第二个查询检索出的记录之后剩余的记录</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;什么是Oracle&quot;&gt;&lt;a href=&quot;#什么是Oracle&quot; class=&quot;headerlink&quot; title=&quot;什么是Oracle?&quot;&gt;&lt;/a&gt;什么是Oracle?&lt;/h2&gt;&lt;p&gt;1.&amp;nbsp;ORACLE 数据库系统是美国 ORACLE 公司（甲骨文）提供
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle中binary_integer与pls_integer</title>
+    <link href="http://yoursite.com/2018/06/10/Oracle%E4%B8%ADbinary_integer%E4%B8%8Epls_integer/"/>
+    <id>http://yoursite.com/2018/06/10/Oracle中binary_integer与pls_integer/</id>
+    <published>2018-06-10T01:44:54.129Z</published>
+    <updated>2018-05-31T11:42:20.056Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Oracle中binary-integer与pls-integer"><a href="#Oracle中binary-integer与pls-integer" class="headerlink" title="Oracle中binary_integer与pls_integer"></a>Oracle中binary_integer与pls_integer</h1><h2 id="binary-integer与pls-integer"><a href="#binary-integer与pls-integer" class="headerlink" title="binary_integer与pls_integer"></a>binary_integer与pls_integer</h2><ul><li>binary_integer与pls_integer都是整型类型.</li><li>binary_integer类型变量值计算是由Oracle来执行,不会出现溢出,但是执行速度较慢,因为它是由Oracle模拟执行.</li><li>pls_integer是由CPU来运算,可能会出现溢出,但其执行速度比前者快.</li></ul><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>在Oracle8中定义了:标量(SCALAR),复合(COMPOSITE),引用(REFERENCE)和LOB四种数据类型.</p></blockquote><h3 id="标量-SCALAR"><a href="#标量-SCALAR" class="headerlink" title="标量(SCALAR)"></a>标量(SCALAR)</h3><p>合法的标量类型与数据库的列所使用的类型相同,此外它还有一些扩展.又分为七个组:数字,字符,行,日期,行标识,布尔和可信.</p><h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><p> <strong>它有三种基本类型-NUMBER,PLS_INTEGER和BINARY_INTEGER.</strong> </p><ul><li>NUMBER可以描述整数或实数,而PLS_INTEGER和BINARY_INTEGER只能描述整数.</li><li><p>NUMBER,是以十进制格式进行存储的,它便于存储,但在计算上,系统会自动将它转换成二进制进行运算.它的定义方式是 <strong>NUMBER(P,S)</strong> p是精度:最大38位,s是刻度范围,可在-84…127间取值.</p><blockquote><p>举例:<br>s取值为负数时 : i number(5,-2);<br>给 i 赋值 1234567 得到的结果是 <strong>1234600</strong><br>给 i 赋值为 1234567.1234 得到结果是 <strong>1234600</strong> </p></blockquote></li><li><p>BINARY_INTEGER用来描述不储存在数据库中,但是需要用来计算的带符号的整数值.循环计数器经常使用这种类型.</p></li><li>PLS_INTEGER和BINARY_INTEGE唯一区别是在计算当中发生溢出时,BINARY_INTEGER型的变量会自动指派给一个NUMBER型而不会出错,PLS_INTEGER型的变量将会发生错误.</li></ul><h4 id="可信"><a href="#可信" class="headerlink" title="可信"></a>可信</h4><ul><li>只有一种类型 : MLSLABEL,可以在trusted Oracle(一种数据库类型)中用来保存可变长度的二进制标签.在标准Oracle中,只能存储null值.</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Oracle中binary-integer与pls-integer&quot;&gt;&lt;a href=&quot;#Oracle中binary-integer与pls-integer&quot; class=&quot;headerlink&quot; title=&quot;Oracle中binary_integer与pls_
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>多线程相关知识点</title>
+    <link href="http://yoursite.com/2018/06/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2018/06/09/多线程/</id>
+    <published>2018-06-09T05:53:12.471Z</published>
+    <updated>2018-06-11T00:39:29.471Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="线程创建方式"><a href="#线程创建方式" class="headerlink" title="线程创建方式"></a>线程创建方式</h1><h2 id="1-继承Thread类创建线程"><a href="#1-继承Thread类创建线程" class="headerlink" title="1.继承Thread类创建线程"></a>1.继承Thread类创建线程</h2><blockquote><p>步骤:<br>1.定义Thread类的子类,并重写该类的run()方法,该方法的方法体就是线程需要完成的任务,run()方法也称为线程执行体。</p></blockquote><p>2.创建Thread子类的实例，也就是创建了线程对象</p><blockquote></blockquote><p>3.启动线程，即调用线程的start()方法</p><blockquote></blockquote><pre><code>代码实例:public class MyThread extends Thread{//继承Thread     public void run(){        //重写run方法     }}public class Main {     public static void main(String[] args){    　new MyThread().start();//创建并启动线程    }}</code></pre><h2 id="2-实现Runnable接口创建线程"><a href="#2-实现Runnable接口创建线程" class="headerlink" title="2.实现Runnable接口创建线程"></a>2.实现Runnable接口创建线程</h2><blockquote><p>步骤:<br>1.定义Runnable接口的实现类，重写run()方法，run()方法为线程的执行体.</p></blockquote><p>2.创建Runnable实现类的实例，并用这个实例作为Thread的target来创建Thread对象， <strong>这个Thread对象才是真正的线程对象</strong> </p><blockquote></blockquote><p>3.通过调用线程对象的start()方法来启动线程</p><blockquote></blockquote><pre><code>代码实例:public class MyThread2 implements Runnable{//实现Runnable接口    public void run(){    //重写run方法    }}public class Main {    public static void main(String[] args){        //创建并启动线程        new Thread(new MyThread2()).start();    }}</code></pre><h2 id="3-使用Callable接口和Future接口创建线程"><a href="#3-使用Callable接口和Future接口创建线程" class="headerlink" title="3.使用Callable接口和Future接口创建线程"></a>3.使用Callable接口和Future接口创建线程</h2><p>和Runnable接口不一样，Callable接口提供了一个call（）方法作为线程执行体，call()方法比run()方法功能要强大。</p><blockquote></blockquote><p>1.call( )方法可以有返回值</p><blockquote></blockquote><p>2.call( )方法可以声明抛出异常</p><blockquote></blockquote><pre><code>Java5提供了Future接口来代表Callable接口里call()方法的返回值，并且为Future接口提供了一个实现类FutureTask，这个实现类既实现了Future接口，还实现了Runnable接口，因此可以作为Thread类的target。</code></pre><blockquote><p>步骤:<br>1.创建Callable接口的实现类，并实现call()方法，然后创建该实现类的实例（从java8开始可以直接使用Lambda表达式创建Callable对象）。</p></blockquote><p>2.使用FutureTask类来包装Callable对象，该FutureTask对象封装了Callable对象的call()方法的返回值</p><blockquote></blockquote><p>3.使用FutureTask对象作为Thread对象的target创建并启动线程（因为FutureTask实现了Runnable接口）</p><blockquote></blockquote><p>4.调用FutureTask对象的get()方法来获得子线程执行结束后的返回值</p><blockquote></blockquote><pre><code>public class Main {    public static void main(String[] args){        MyThread3 th=new MyThread3();         //使用Lambda表达式创建Callable对象         //使用FutureTask类来包装Callable对象         FutureTask&lt;Integer&gt; future=new FutureTask&lt;Integer&gt;(             (Callable&lt;Integer&gt;)()-&gt;{                 return 5;             }         );         new Thread(task,&quot;有返回值的线程&quot;).start();//实质上还是以Callable对象来创建并启动线程         try{             System.out.println(&quot;子线程的返回值：&quot;+future.get());//get()方法会阻塞，直到子线程执行结束才返回         }catch(Exception e){             ex.printStackTrace();         }     } }</code></pre><h1 id="线程五种状态-新建-就绪-运行-阻塞-死亡"><a href="#线程五种状态-新建-就绪-运行-阻塞-死亡" class="headerlink" title="线程五种状态(新建,就绪,运行,阻塞,死亡)"></a>线程五种状态(新建,就绪,运行,阻塞,死亡)</h1><h2 id="1-新建状态-New"><a href="#1-新建状态-New" class="headerlink" title="1.新建状态(New)"></a>1.新建状态(New)</h2><pre><code>当用new操作创建一个线程时， 例如new Thread(r)，线程还没有开始运行，此时线程处在新建状态。 当一个线程处于新生状态时，程序还没有开始运行线程中的代码</code></pre><h2 id="2-就绪状态-Runnable"><a href="#2-就绪状态-Runnable" class="headerlink" title="2.就绪状态(Runnable)"></a>2.就绪状态(Runnable)</h2><pre><code>一个新创建的线程并不自动开始运行，要执行线程，必须调用线程的start()方法。当线程对象调用start()方法即启动了线程，start()方法创建线程运行的系统资源，并调度线程运行run()方法。当start()方法返回后，线程就处于就绪状态。处于就绪状态的线程并不一定立即运行run()方法，线程还必须同其他线程竞争CPU时间，只有获得CPU时间才可以运行线程。因为在单CPU的计算机系统中，不可能同时运行多个线程，一个时刻仅有一个线程处于运行状态。因此此时可能有多个线程处于就绪状态。对多个处于就绪状态的线程是由Java运行时系统的线程调度程序(thread scheduler)来调度的。</code></pre><h2 id="3-运行状态-Running"><a href="#3-运行状态-Running" class="headerlink" title="3.运行状态(Running)"></a>3.运行状态(Running)</h2><pre><code>当线程获得CPU时间后，它才进入运行状态，真正开始执行run()方法.</code></pre><h2 id="4-阻塞状态-Blocked"><a href="#4-阻塞状态-Blocked" class="headerlink" title="4. 阻塞状态(Blocked)"></a>4. 阻塞状态(Blocked)</h2><blockquote><p>线程运行过程中，可能由于各种原因进入阻塞状态:</p></blockquote><p>1.线程通过调用sleep方法进入睡眠状态；</p><blockquote></blockquote><p>2.线程调用一个在I/O上被阻塞的操作，即该操作在输入输出操作完成之前不会返回到它的调用者；</p><blockquote></blockquote><p>3.线程试图得到一个锁，而该锁正被其他线程持有；</p><blockquote></blockquote><p>4.线程在等待某个触发条件；</p><blockquote><p>所谓阻塞状态是正在运行的线程没有运行结束，暂时让出CPU，这时其他处于就绪状态的线程就可以获得CPU时间，进入运行状态。</p></blockquote><h2 id="5-死亡状态-Dead"><a href="#5-死亡状态-Dead" class="headerlink" title="5. 死亡状态(Dead)"></a>5. 死亡状态(Dead)</h2><blockquote><p>有两个原因会导致线程死亡：</p></blockquote><p>1.run方法正常退出而自然死亡，</p><blockquote></blockquote><p>2.一个未捕获的异常终止了run方法而使线程猝死。</p><blockquote></blockquote><p>为了确定线程在当前是否存活着（就是要么是可运行的，要么是被阻塞了），需要使用isAlive方法。如果是可运行或被阻塞，这个方法返回true； 如果线程仍旧是new状态且不是可运行的， 或者线程死亡了，则返回false.</p><h1 id="线程锁机制"><a href="#线程锁机制" class="headerlink" title="线程锁机制"></a>线程锁机制</h1><h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><blockquote><p>假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。悲观锁假定其他线程企图访问或者改变你正在访问、更改的对象的概率是很高的，因此在悲观锁的环境中，在你开始改变此对象之前就将该对象锁住，并且直到你提交了所作的更改之后才释放锁。 </p></blockquote><h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><blockquote><p>假设不会发生并发冲突。轻易不加锁。 </p></blockquote><h2 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h2><pre><code>线程挂起和恢复的操作都需要转入内核态中完成，这些操作给系统的并发性能带来了很大的压力，在许多应用中，共享数据的锁定状态只会持续很短的一段时间，为了这段时间去挂起和恢复线程并不值得，可以让后请求锁的线程等待一会儿，但不放弃处理器的执行时间，让线程执行一个忙循环（自旋）。 自旋锁默认的自旋次数值是10次，可以使用参数-XX:PreBlockSpin更改。 自适应自旋意味着自旋的时间不再固定，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定。 </code></pre><h2 id="锁清除："><a href="#锁清除：" class="headerlink" title="锁清除："></a>锁清除：</h2><pre><code>虚拟机即时编译器在运行时，对一些代码上要求同步，但是被检测到不可能存在共享数据竞争的锁进行消除。锁消除的主要判定依据来源于逃逸分析的数据支持。 </code></pre><h2 id="锁粗化："><a href="#锁粗化：" class="headerlink" title="锁粗化："></a>锁粗化：</h2><pre><code>如果虚拟机探测到有一系列连续操作都对同一个对象反复加锁和解锁，将会把加锁同步的范围扩展（粗化）到整个操作序列的外部。 </code></pre><h2 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h2><pre><code>Java SE1.6为了减少获得锁和释放锁所带来的性能消耗，引入了“偏向锁”和“轻量级锁”，所以在Java SE1.6里锁一共有四种状态，无锁状态，偏向锁状态，轻量级锁状态和重量级锁状态，它会随着竞争情况逐渐升级。锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后不能降级成偏向锁。这种锁升级却不能降级的策略，目的是为了提高获得锁和释放锁的效率。 </code></pre><h2 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h2><pre><code>Hotspot的作者经过以往的研究发现大多数情况下锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。当一个线程访问同步块并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进入和退出同步块时不需要花费CAS操作来加锁和解锁，而只需简单的测试一下对象头的Mark Word里是否存储着指向当前线程的偏向锁，如果测试成功，表示线程已经获得了锁，如果测试失败，则需要再测试下Mark Word中偏向锁的标识是否设置成1（表示当前是偏向锁），如果没有设置，则使用CAS竞争锁，如果设置了，则尝试使用CAS将对象头的偏向锁指向当前线程。 偏向锁的撤销：偏向锁使用了一种等到竞争出现才释放锁的机制，所以当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。偏向锁的撤销，需要等待全局安全点（在这个时间点上没有字节码正在执行），它会首先暂停拥有偏向锁的线程，然后检查持有偏向锁的线程是否活着，如果线程不处于活动状态，则将对象头设置成无锁状态，如果线程仍然活着，拥有偏向锁的栈会被执行，遍历偏向对象的锁记录，栈中的锁记录和对象头的Mark Word要么重新偏向于其他线程，要么恢复到无锁或者标记对象不适合作为偏向锁，最后唤醒暂停的线程。下图中的线程1演示了偏向锁初始化的流程，线程2演示了偏向锁撤销的流程。 </code></pre><p>关闭偏向锁：偏向锁在Java 6和Java 7里是默认启用的，但是它在应用程序启动几秒钟之后才激活，如有必要可以使用JVM参数来关闭延迟-XX：BiasedLockingStartupDelay = 0。如果你确定自己应用程序里所有的锁通常情况下处于竞争状态，可以通过JVM参数关闭偏向锁-XX:-UseBiasedLocking=false，那么默认会进入轻量级锁状态。 </p><h2 id="轻量级锁："><a href="#轻量级锁：" class="headerlink" title="轻量级锁："></a>轻量级锁：</h2><pre><code>轻量级锁加锁：线程在执行同步块之前，JVM会先在当前线程的栈桢中创建用于存储锁记录的空间，并将对象头中的Mark Word复制到锁记录中，官方称为Displaced Mark Word。然后线程尝试使用CAS将对象头中的Mark Word替换为指向锁记录的指针。如果成功，当前线程获得锁，如果失败，表示其他线程竞争锁，当前线程便尝试使用自旋来获取锁。 轻量级锁解锁：轻量级解锁时，会使用原子的CAS操作来将Displaced Mark Word替换回到对象头，如果成功，则表示没有竞争发生。如果失败，表示当前锁存在竞争，锁就会膨胀成重量级锁。下图是两个线程同时争夺锁，导致锁膨胀的流程图。 因为自旋会消耗CPU，为了避免无用的自旋（比如获得锁的线程被阻塞住了），一旦锁升级成重量级锁，就不会再恢复到轻量级锁状态。当锁处于这个状态下，其他线程试图获取锁时，都会被阻塞住，当持有锁的线程释放锁之后会唤醒这些线程，被唤醒的线程就会进行新一轮的夺锁之争。 </code></pre><h2 id="重量级锁："><a href="#重量级锁：" class="headerlink" title="重量级锁："></a>重量级锁：</h2><pre><code>重量锁在JVM中又叫对象监视器（Monitor），它至少包含一个竞争锁的队列，和一个信号阻塞队列（wait队列），前者负责做互斥，后一个用于做线程同步。 </code></pre><h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><blockquote><p>线程池是一种多线程处理形式，处理过程中将任务添加到队列，然后在创建线程后自动启动这些任务。<br>线程池线程都是后台线程。<br>每个线程都使用默认的堆栈大小，以默认的优先级运行，并处于多线程单元中。<br>如果某个线程在托管代码中空闲（如正在等待某个事件）,则线程池将插入另一个辅助线程来使所有处理器保持繁忙。<br>如果所有线程池线程都始终保持繁忙，但队列中包含挂起的工作，则线程池将在一段时间后创建另一个辅助线程但线程的数目永远不会超过最大值。<br>超过最大值的线程可以排队，但他们要等到其他线程完成后才启动。</p></blockquote><h3 id="线程池的好处"><a href="#线程池的好处" class="headerlink" title="线程池的好处"></a>线程池的好处</h3><blockquote><p>1.重用线程池中的线程,减少因对象创建,销毁所带来的性能开销;</p></blockquote><p>2.能有效的控制线程的最大并发数,提高系统资源利用率,同时避免过多的资源竞争,避免堵塞;</p><blockquote></blockquote><p>3.能够多线程进行简单的管理,使线程的使用简单、高效。</p><h3 id="本地线程"><a href="#本地线程" class="headerlink" title="本地线程"></a>本地线程</h3><p>一个程序里面不同的执行路径</p><blockquote></blockquote><p>学习线程首先要理清楚三个概念：</p><blockquote></blockquote><p>进程：进程是一个静态的概念</p><blockquote></blockquote><p>线程：一个进程里面有一个主线程叫main()方法，是一个程序里面的，一个进程里面不同的执行路径。</p><blockquote></blockquote><p>在同一个时间点上，一个CPU只能支持一个线程在执行。因为CPU运行的速度很快，因此我们看起来的感觉就像是多线程一样。</p><h3 id="线程适用的场景"><a href="#线程适用的场景" class="headerlink" title="线程适用的场景"></a>线程适用的场景</h3><blockquote></blockquote><p>1 线程间有数据共享，并且数据是需要修改的（不同任务间需要大量共享数据或频繁通信时）； </p><blockquote></blockquote><p>2 提供非均质的服务（有优先级任务处理）事件响应有优先级； </p><blockquote></blockquote><p>3 单任务并行计算，在非CPU Bound的场景下提高响应速度，降低时延； </p><blockquote></blockquote><p>4 与人有IO交互的应用，良好的用户体验（键盘鼠标的输入，立刻响应）</p><h1 id="产生死锁的四个必要条件"><a href="#产生死锁的四个必要条件" class="headerlink" title="产生死锁的四个必要条件"></a>产生死锁的四个必要条件</h1><blockquote></blockquote><p>①互斥条件：进程对其所要求的资源进行独占性控制；</p><blockquote></blockquote><p>②请求保持条件：进程已经保持了至少一个资源，但又提出新的资源申请，而该资源又得不到满足，于是该进程阻塞，但其原先获得的资源保持不放；</p><blockquote></blockquote><p>③不可剥夺条件：进程已获得的资源在未使用完之前，不能被剥夺，只能在使用完后由自己释放；</p><blockquote></blockquote><p>④环路条件：当发生死锁时，在进程资源有向图中存在环路。</p><p>解决其中一个即可解决死锁问题.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;线程创建方式&quot;&gt;&lt;a href=&quot;#线程创建方式&quot; class=&quot;headerlink&quot; title=&quot;线程创建方式&quot;&gt;&lt;/a&gt;线程创建方式&lt;/h1&gt;&lt;h2 id=&quot;1-继承Thread类创建线程&quot;&gt;&lt;a href=&quot;#1-继承Thread类创建线程&quot; class
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>集合接口中用的较多的底层实现</title>
+    <link href="http://yoursite.com/2018/06/09/%E9%9B%86%E5%90%88%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%94%A8%E7%9A%84%E8%BE%83%E5%A4%9A%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2018/06/09/集合接口中用的较多的底层实现/</id>
+    <published>2018-06-09T04:50:45.291Z</published>
+    <updated>2018-06-10T02:53:21.506Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="单列集合-Collection接口"><a href="#单列集合-Collection接口" class="headerlink" title="单列集合(Collection接口)"></a>单列集合(Collection接口)</h2><p>单列集合又分为list集合与set集合</p><h3 id="A-List接口-有序-有索引-允许重复"><a href="#A-List接口-有序-有索引-允许重复" class="headerlink" title="A. List接口(有序,有索引,允许重复)"></a>A. List接口(有序,有索引,允许重复)</h3><h4 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h4><blockquote><p>底层是数组结构,具有查询快,增删慢的特点<br>线程不同步:所以不安全,但效率高</p></blockquote><h4 id="2-LinkedList"><a href="#2-LinkedList" class="headerlink" title="2.LinkedList"></a>2.LinkedList</h4><blockquote><p>底层是链表结构,具有查询慢,增删快的特点<br>线程不同步</p></blockquote><h4 id="3-Vector"><a href="#3-Vector" class="headerlink" title="3.Vector"></a>3.Vector</h4><blockquote><p>底层是数组结构,具有查询快,增删慢的特点<br>线程同步:所以安全,但效率低</p></blockquote><h3 id="B-Set接口-无序-无索引-不允许重复"><a href="#B-Set接口-无序-无索引-不允许重复" class="headerlink" title="B.Set接口(无序,无索引,不允许重复)"></a>B.Set接口(无序,无索引,不允许重复)</h3><h4 id="1-HashSet-线程不同步"><a href="#1-HashSet-线程不同步" class="headerlink" title="1.HashSet(线程不同步)"></a>1.HashSet(线程不同步)</h4><blockquote><p>集合中存储数据的位置是根据元素的哈希值来判断的,<br>哈希值是根据元素的地址值来计算的,<br>当元素的哈希值一样时,则使用equals方法来比较两个元素<br>     <strong>(注意:如果元素类没有重写equals方法,则使用父类的equals方法)</strong> </p><pre><code>HashSet保证元素唯一性的方法:复写hashCode和equals方法,当两个方法都重复时才认为元素重复</code></pre></blockquote><h4 id="2-LinkedHashSet-线程不同步"><a href="#2-LinkedHashSet-线程不同步" class="headerlink" title="2.LinkedHashSet(线程不同步)"></a>2.LinkedHashSet(线程不同步)</h4><blockquote><p>既能保证元素有序,又能保证元素唯一</p></blockquote><pre><code>继承了HashSet,所以保证元素唯一性的方法与HashSet相同:复写hashCode和equals方法,当两个方法都重复时才认为元素重复</code></pre><h4 id="3-TreeSet-线程不同步"><a href="#3-TreeSet-线程不同步" class="headerlink" title="3.TreeSet(线程不同步)"></a>3.TreeSet(线程不同步)</h4><blockquote><p>可以将元素自动排序<br>排序的规则有我们自己指定:</p><pre><code>* 元素类实现comparable&lt;E&gt;接口,复写compareTo()方法</code></pre><p>也可以保证元素唯一性:</p><pre><code>* 根据我们自己指定的排序判断来判断元素是否相同</code></pre></blockquote><h2 id="双列集合-Map接口"><a href="#双列集合-Map接口" class="headerlink" title="双列集合(Map接口)"></a>双列集合(Map接口)</h2><h4 id="1-HashMap-线程不同步"><a href="#1-HashMap-线程不同步" class="headerlink" title="1.HashMap(线程不同步)"></a>1.HashMap(线程不同步)</h4><blockquote><p>保证键的唯一性:<br>键的类要复写hashCode和equals方法</p></blockquote><h4 id="2-LinkedHashMap-线程不同步"><a href="#2-LinkedHashMap-线程不同步" class="headerlink" title="2.LinkedHashMap(线程不同步)"></a>2.LinkedHashMap(线程不同步)</h4><blockquote><p>既能保证键的有序,也能保证键的唯一性:<br>键的类要复写hashCode和equals方法</p></blockquote><h4 id="3-TreeMap-线程不同步"><a href="#3-TreeMap-线程不同步" class="headerlink" title="3.TreeMap(线程不同步)"></a>3.TreeMap(线程不同步)</h4><blockquote><p>可以将键自动排序<br>排序的规则由我们自己指定:</p><ul><li>键实现comparable<e>接口,复写compareTo方法<br>也可以保证键唯一性: </e></li><li>不过是根据我们自己指定排序判断来判断键是否相同</li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;单列集合-Collection接口&quot;&gt;&lt;a href=&quot;#单列集合-Collection接口&quot; class=&quot;headerlink&quot; title=&quot;单列集合(Collection接口)&quot;&gt;&lt;/a&gt;单列集合(Collection接口)&lt;/h2&gt;&lt;p&gt;单列集合又分为l
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>POJO和JavaBean的区别</title>
+    <link href="http://yoursite.com/2018/04/06/pojo%E4%B8%8EjavaBean/"/>
+    <id>http://yoursite.com/2018/04/06/pojo与javaBean/</id>
+    <published>2018-04-05T16:00:00.000Z</published>
+    <updated>2018-08-09T08:45:38.447Z</updated>
+    
+    <content type="html"><![CDATA[<p>详细介绍POJO和JavaBean以及它们的区别</p><h2 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h2><p>POJO（Plain Ordinary Java Object）：简单的Java对象，实际就是普通JavaBeans，是为了避免和EJB混淆所创造的简称，而且简称比较直接.。其中有一些属性及其getter/setter方法的类，没有业务逻辑，有时可以作为VO（value -object）或DTO（Data Transform Object）来使用，如果有一个简单的运算属性也可，但不允许有业务方法，也不能携带有connection之类的方法。</p><p>POJO是一个简单的普通的Java对象，它不包含业务逻辑或持久逻辑等，但不是JavaBean、EntityBean等，不具有任何特殊角色和不继承或不实现任何其它Java框架的类或接口。</p><p>POJO主要用来指代那些没用遵从特定的Java对象模型，约定或框架如EJB的Java对象，一个POJO是一个不受任何限制的Java对象（除了Java语言规范）。例如一个POJO不应该是:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扩展预定的类，如：public class Foo extends javax.servlet.http.HttpServlet { …<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实现预定的接口，如：public class Bar implements javax.ejb.EntityBean { …<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;包含预定的标注，如：@javax.ejb.Entity public class Baz{ …</p><p>POJO实质上可以理解为简单的实体类，顾名思义POJO类的作用是方便程序员使用数据库中的数据表，对于广大的程序员可以很方便的将POJO类当做对象来进行使用，当然也是可以方便的调用其getXxx，setXxx方法。POJO类也给我们在struts框架中的配置带来了很大的方便。</p><h2 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h2><p>JavaBean是一种Java语言写成的可重用组件。为写成JavaBean，类必须是具体的和公共的，并且具有无参数的构造器。JavaBean通过提供符合一致性设计模式的公共方法将内部域暴露成员属性，setXxx/getXxx方法获取。属性名称符合这种模式，其他Java类可以通过自省机制（反射机制）发现和操作这些JavaBean的属性。</p><p>当然，它的方法命名、构造及行为也必须符合特定的约定：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类必须有一个公共的缺省构造函数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类的属性使用getter和setter来访问，其他方法遵从标准命名规范。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个类应是可序列化的。 </p><p>因为这些要求主要是靠约定而不是靠实现接口，所以许多开发者把JavaBean看作遵从特定命名约定的POJO。 简而言之：当一个Pojo可序列化，有一个无参的构造函数，使用getter和setter方法来访问属性时，他就是一个JavaBean。</p><h2 id="POJO和JavaBean的区别"><a href="#POJO和JavaBean的区别" class="headerlink" title="POJO和JavaBean的区别"></a>POJO和JavaBean的区别</h2><p>POJO和JavaBean是常见且容易混淆的两个关键字</p><p>具有一部分getter/setter方法的类就可以称作为POJO，但是JavaBean比POJO复杂，JavaBean是可复用的组件，对JavaBean并没有严格的规范，理论上讲任何一个Java类都可以是一个Bean 。但通常情况下由于JavaBean是被容器所创建（例如Tomcat）的，所以JavaBean应具有一个无参的构造器，另外通常JavaBean还要实现Serializable接口用于实现Bean的持久性，JavaBean是不能被跨进程访问的。</p><p>JavaBean是一种组件技术，就好像你做了一个扳子，而这个扳子会在很多地方被拿去用，这个扳子也提供多种功能（你可以拿这个扳子扳、锤、撬等等），而这个扳子就是一个组件。</p><p>一般在web应用程序中建立一个数据库的映射对象时，就只能称它为POJO。</p><p><strong>错误的认识</strong><br>POJO是这样的一种“纯粹的”JavaBean，在它里面除了JavaBean规范的方法和属性没有别的东西，即private属性以及对这个属性方法的public的get和set方法。我们会发现这样的JavaBean很“单纯”，它只能装载数据，作为数据存储的载体，而不具有业务逻辑处理的能力。</p><p><strong>真正的意思</strong><br>POJO = “Plain Old Java Object”，是MartinFowler等发明的一个术语，用来表示普通的Java对象，不是JavaBean, EntityBean 或者 SessionBean。POJO不担当任何特殊的角色，也不实现任何特殊的Java框架的接口如，EJB，JDBC等等。</p><p>即POJO是一个简单的普通的Java对象，它不包含业务逻辑或持久逻辑等，但不是JavaBean、EntityBean等，不具有任何特殊角色和不继承或不实现任何其它Java框架的类或接口。</p><p>下面是摘自Martin Fowler个人网站的一句话：</p><p><strong>“We wondered why people were so against using regular objects in their systems and concluded that it was because simple objects lacked a fancy name. So we gave them one, and it’s caught on very nicely.”－－Martin Fowler</strong></p><p>我们疑惑为什么人们不喜欢在他们的系统中使用普通的对象，我们得到的结论是——普通的对象缺少一个响亮的名字，因此我们给它们起了一个，并且取得了很好的效果。——Martin Fowler</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>POJO：</strong></p><ol><li><p>POJO对象有时也被称为Data对象，大量应用于表现现实中的对象</p></li><li><p>如果项目中使用了Hibernate框架，有一个关联的xml文件，使对象与数据库中的表对应，对象的属性与表中的字段相对应</p></li><li><p>POJO类的作用是方便程序员使用数据库中的数据表</p></li><li><p>POJO = “Plain Old Java Object”，用来表示普通的Java对象，不是JavaBean, EntityBean 或者 SessionBean</p></li><li><p>POJO不担当任何特殊的角色，也不实现任何特殊的Java框架的接口如：EJB、JDBC等等</p></li></ol><p><strong>JavaBean：</strong></p><ol><li><p>是一种JAVA语言写成的可重用组件，其方法命名、构造、行为符合一定的约定</p></li><li><p>必须有一个公共的缺省构造函数</p></li><li><p>属性使用getter和setter来访问，其他方法遵从标准命名规范</p></li><li><p>可序列化的（实现serializable接口）</p></li><li><p>Java:Bean是不能被跨进程访问的</p></li></ol><p><strong>一般在web应用程序中建立一个数据库的映射对象时称它为POJO，JavaBean比POJO复杂很多。</strong></p><p><strong>POJO的格式用于数据的临时传递，它只能装在数据，作为数据存储的载体，而不具有业务逻辑处理的能力。</strong></p><p><strong>JavaBean虽然数据的获取与POJO一样，但是JavaBean当中可以有其它的方法。</strong><br><br><br>参考资料：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://baike.baidu.com/item/POJO/3311958" target="_blank" rel="noopener">POJO与JavaBean的区别</a><br><br><br></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;详细介绍POJO和JavaBean以及它们的区别&lt;/p&gt;
+&lt;h2 id=&quot;POJO&quot;&gt;&lt;a href=&quot;#POJO&quot; class=&quot;headerlink&quot; title=&quot;POJO&quot;&gt;&lt;/a&gt;POJO&lt;/h2&gt;&lt;p&gt;POJO（Plain Ordinary Java Objec
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
