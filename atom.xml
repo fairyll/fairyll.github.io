@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://github.com/fairyll/"/>
   <updated>2018-08-09T08:54:58.995Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://github.com/fairyll/</id>
   
   <author>
     <name>Fairy</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>AOP的理解</title>
-    <link href="http://yoursite.com/2018/07/19/AOP%E7%9A%84%E7%90%86%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/07/19/AOP的理解/</id>
+    <link href="https://github.com/fairyll/2018/07/19/AOP%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://github.com/fairyll/2018/07/19/AOP的理解/</id>
     <published>2018-07-18T16:00:00.000Z</published>
     <updated>2018-08-09T08:54:58.995Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>随笔二</title>
-    <link href="http://yoursite.com/2018/07/04/%E9%9A%8F%E7%AC%94%E4%BA%8C/"/>
-    <id>http://yoursite.com/2018/07/04/随笔二/</id>
+    <link href="https://github.com/fairyll/2018/07/04/%E9%9A%8F%E7%AC%94%E4%BA%8C/"/>
+    <id>https://github.com/fairyll/2018/07/04/随笔二/</id>
     <published>2018-07-04T13:24:00.384Z</published>
     <updated>2018-07-04T13:31:21.639Z</updated>
     
@@ -62,8 +62,8 @@
   
   <entry>
     <title>快速排序算法</title>
-    <link href="http://yoursite.com/2018/06/25/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2018/06/25/快速排序算法/</id>
+    <link href="https://github.com/fairyll/2018/06/25/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"/>
+    <id>https://github.com/fairyll/2018/06/25/快速排序算法/</id>
     <published>2018-06-25T03:14:28.091Z</published>
     <updated>2018-07-06T00:24:26.127Z</updated>
     
@@ -84,8 +84,8 @@
   
   <entry>
     <title>随笔一</title>
-    <link href="http://yoursite.com/2018/06/22/%E9%9A%8F%E7%AC%94%E4%B8%80/"/>
-    <id>http://yoursite.com/2018/06/22/随笔一/</id>
+    <link href="https://github.com/fairyll/2018/06/22/%E9%9A%8F%E7%AC%94%E4%B8%80/"/>
+    <id>https://github.com/fairyll/2018/06/22/随笔一/</id>
     <published>2018-06-22T09:26:36.507Z</published>
     <updated>2018-07-06T00:25:37.232Z</updated>
     
@@ -105,8 +105,8 @@
   
   <entry>
     <title>常见的设计模式</title>
-    <link href="http://yoursite.com/2018/06/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2018/06/20/设计模式/</id>
+    <link href="https://github.com/fairyll/2018/06/20/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://github.com/fairyll/2018/06/20/设计模式/</id>
     <published>2018-06-20T14:19:28.472Z</published>
     <updated>2018-06-20T14:19:23.763Z</updated>
     
@@ -129,8 +129,8 @@
   
   <entry>
     <title>jvm知识点小结之一</title>
-    <link href="http://yoursite.com/2018/06/16/jvm%E7%9F%A5%E8%AF%86/"/>
-    <id>http://yoursite.com/2018/06/16/jvm知识/</id>
+    <link href="https://github.com/fairyll/2018/06/16/jvm%E7%9F%A5%E8%AF%86/"/>
+    <id>https://github.com/fairyll/2018/06/16/jvm知识/</id>
     <published>2018-06-16T13:31:32.070Z</published>
     <updated>2018-06-16T13:38:34.757Z</updated>
     
@@ -150,8 +150,8 @@
   
   <entry>
     <title>Oracle数据库常用指令</title>
-    <link href="http://yoursite.com/2018/06/10/Oracle%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
-    <id>http://yoursite.com/2018/06/10/Oracle常用指令/</id>
+    <link href="https://github.com/fairyll/2018/06/10/Oracle%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
+    <id>https://github.com/fairyll/2018/06/10/Oracle常用指令/</id>
     <published>2018-06-10T01:44:54.160Z</published>
     <updated>2018-05-29T11:13:04.876Z</updated>
     
@@ -171,8 +171,8 @@
   
   <entry>
     <title>Oracle中binary_integer与pls_integer</title>
-    <link href="http://yoursite.com/2018/06/10/Oracle%E4%B8%ADbinary_integer%E4%B8%8Epls_integer/"/>
-    <id>http://yoursite.com/2018/06/10/Oracle中binary_integer与pls_integer/</id>
+    <link href="https://github.com/fairyll/2018/06/10/Oracle%E4%B8%ADbinary_integer%E4%B8%8Epls_integer/"/>
+    <id>https://github.com/fairyll/2018/06/10/Oracle中binary_integer与pls_integer/</id>
     <published>2018-06-10T01:44:54.129Z</published>
     <updated>2018-05-31T11:42:20.056Z</updated>
     
@@ -192,8 +192,8 @@
   
   <entry>
     <title>多线程相关知识点</title>
-    <link href="http://yoursite.com/2018/06/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/06/09/多线程/</id>
+    <link href="https://github.com/fairyll/2018/06/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://github.com/fairyll/2018/06/09/多线程/</id>
     <published>2018-06-09T05:53:12.471Z</published>
     <updated>2018-06-11T00:39:29.471Z</updated>
     
@@ -213,8 +213,8 @@
   
   <entry>
     <title>集合接口中用的较多的底层实现</title>
-    <link href="http://yoursite.com/2018/06/09/%E9%9B%86%E5%90%88%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%94%A8%E7%9A%84%E8%BE%83%E5%A4%9A%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://yoursite.com/2018/06/09/集合接口中用的较多的底层实现/</id>
+    <link href="https://github.com/fairyll/2018/06/09/%E9%9B%86%E5%90%88%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%94%A8%E7%9A%84%E8%BE%83%E5%A4%9A%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://github.com/fairyll/2018/06/09/集合接口中用的较多的底层实现/</id>
     <published>2018-06-09T04:50:45.291Z</published>
     <updated>2018-06-10T02:53:21.506Z</updated>
     
@@ -234,8 +234,8 @@
   
   <entry>
     <title>POJO和JavaBean的区别</title>
-    <link href="http://yoursite.com/2018/04/06/pojo%E4%B8%8EjavaBean/"/>
-    <id>http://yoursite.com/2018/04/06/pojo与javaBean/</id>
+    <link href="https://github.com/fairyll/2018/04/06/pojo%E4%B8%8EjavaBean/"/>
+    <id>https://github.com/fairyll/2018/04/06/pojo与javaBean/</id>
     <published>2018-04-05T16:00:00.000Z</published>
     <updated>2018-08-09T08:45:38.447Z</updated>
     
